@@ -1,0 +1,29 @@
+{
+  "name": "hippie-swagger",
+  "version": "1.0.0",
+  "description": "Hippie middleware for swagger driven testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/index.test.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CacheControl/hippie-swagger.git"
+  },
+  "keywords": [
+    "hippie",
+    "swagger"
+  ],
+  "author": "Cache Hamm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CacheControl/hippie-swagger/issues"
+  },
+  "homepage": "https://github.com/CacheControl/hippie-swagger#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "tape": "^4.0.3",
+    "tap-spec": "^4.0.2"
+  }
+}
