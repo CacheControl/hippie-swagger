@@ -22,7 +22,7 @@ function handleParameters(pathSpec, path, parameters) {
   pathSpec.parameters.forEach(function(param) {
     //check for existance of required parameters
     if(!Object.keys(parameters).length || parameters[param.name] === undefined && param.required) {
-      throw new Error('Missing required parameter: ' + param.name);
+      throw new Error('Missing required parameter: ' + param.name + '.  Did you forget to call "params({' + param.name + ': value})"?');
     }
     //validate parameter against json-schema definition
     var isValid = skeemas.validate(parameters[param.name], param).valid;
@@ -47,20 +47,15 @@ function middleware(swaggerDef, options, next) {
     throw new Error('Swagger spec does not define method: "' + method + '".  Available paths: ' + Object.keys(swaggerDef.paths[this._url]).join(","));
   }
   var pathSpec = swaggerDef.paths[this._url][method];
-
   this.expect(validateResponse.bind(this, pathSpec));
-
-  //default to json
-  //if(!pathSpec.consumes || pathSpec.consumes.includes('application/json')) {
-  //  //todo - set request options for this.json();
-  //}
 
   options.url = handleParameters(pathSpec, options.url, this.swaggerParams);
   next(options);
 }
 
 function validateResponse(pathSpec, res, body, next) {
-  var result = skeemas.validate(body.data, pathSpec.responses['200'].schema);
+  var schema = pathSpec.responses['200'].schema,
+      result = skeemas.validate(body, schema);
 
   if(!result.valid) return next(new Error('Response failed validation against schema (' + schema + '): ' + result.errors[0]));
 

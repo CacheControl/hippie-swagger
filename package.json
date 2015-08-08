@@ -4,7 +4,7 @@
   "description": "Hippie middleware for swagger driven testing",
   "main": "index.js",
   "scripts": {
-    "test": "node tests/index.test.js | tap-spec"
+    "test": "mocha $(find test -name *.test.js)"
   },
   "repository": {
     "type": "git",
@@ -24,13 +24,13 @@
     "hippie": "*"
   },
   "dependencies": {
-    "skeemas": "^1.2.0",
-    "tape-catch": "^1.0.4"
+    "skeemas": "^1.2.0"
   },
   "devDependencies": {
+    "chai": "^3.2.0",
+    "express": "^4.13.3",
     "hippie": "^0.3.0",
-    "swagger-parser": "^2.5.0",
-    "tap-spec": "^4.0.2",
-    "tape": "^4.0.3"
+    "mocha": "^2.2.5",
+    "swagger-parser": "^2.5.0"
   }
 }

@@ -2,7 +2,7 @@
 
 var swaggerParser = require('swagger-parser');
 
-var schema = {
+module.exports = {
     "swagger": "2.0",
     "info": {
         "version": "1.0.0",
@@ -16,7 +16,10 @@ var schema = {
                 "200": {
                     "description": "Successful response",
                     "schema": {
-                        "$ref": "/foo-base"
+                      "type": "array",
+                      "items": {
+                          "$ref": "/foo"
+                      }
                     }
                 },
               }
@@ -30,7 +33,7 @@ var schema = {
                     "description": "foo object to be added",
                     "required": true,
                     "schema": {
-                        "$ref": "/foo-new"
+                        "$ref": "/foo"
                     }
                   }
                 ],
@@ -38,14 +41,8 @@ var schema = {
                   "200": {
                     "description": "Successful response",
                     "schema": {
-                        "$ref": "/foo-base"
+                        "$ref": "/foo"
                     }
-                  },
-                  "401": {
-                      "description": "unauthorized - invalid or expired jwt"
-                  },
-                  "404": {
-                      "description": "foo not found"
                   }
                 }
             }
@@ -67,22 +64,16 @@ var schema = {
                     "200": {
                         "description": "Successful response",
                         "schema": {
-                            "$ref": "/foo-base"
+                            "$ref": "/foo"
                         }
-                    },
-                    "401": {
-                        "description": "unauthorized - invalid or expired jwt"
-                    },
-                    "404": {
-                        "description": "foo not found"
                     }
                 }
             }
         }
     },
     "definitions": {
-        "/foo-new": {
-            "title": "New Foo",
+        "/foo": {
+            "title": "Foo object definition",
             "description": "Schema for a foo object.",
             "type": "object",
             "properties": {
@@ -101,25 +92,6 @@ var schema = {
                 }
             }
         },
-        "/foo-base": {
-            "title": "Base of a foo Record",
-            "description": "Schema for a foo object without boilerplate dates.",
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "/foo-new"
-                },
-                {
-                    "properties": {
-                        "id": {
-                            "description": "primary identifier for this foo",
-                            "$ref": "#/definitions/uuid",
-                            "required": true
-                        }
-                    }
-                }
-            ]
-        },
         "uuid": {
             "title": "UUID",
             "description": "Schema defining structure of a string representation of a uuid.",
@@ -128,10 +100,3 @@ var schema = {
         },
     }
 };
-
-swaggerParser.parse(schema, function(err, api, metadata) {
-  if(err) throw err;
-  schema = api;
-});
-
-module.exports = schema;
