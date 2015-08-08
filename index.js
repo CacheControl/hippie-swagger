@@ -1,5 +1,28 @@
 'use strict';
 
+var skeemas = require('skeemas');
+
+function handleParameters(spec, path, parameters) {
+  var requestURI = path;
+  if(!spec.parameters || !spec.parameters.length) {
+    return requestURI;
+  }
+  spec.parameters.forEach(function(param) {
+    //check for existance of required parameters
+    if(parameters[param.name] === undefined && param.required) {
+      throw new Error('Missing required parameter: ' + param.name);
+    }
+    //validate parameter against json-schema definition
+    var isValid = skeemas.validate(parameters[param.name], param).valid;
+    if(!isValid) throw new Error('Invalid format for parameter {' + param.name + '}, received: '+ parameters[param.name]);
+
+    //replace parameter in url
+    var regex = new RegExp('{' + param.name + '}', 'g');
+    requestURI = requestURI.replace(regex, parameters[param.name]);
+  });
+  return requestURI;
+}
+
 module.exports = function(swaggerDef, path, parameters) {
   parameters = parameters || [];
   return function(options, next) {
@@ -18,20 +41,9 @@ module.exports = function(swaggerDef, path, parameters) {
     //if(!spec.consumes || spec.consumes.includes('application/json')) {
     //  //todo - set request options for this.json();
     //}
-    var renderedPath = path;
-    if(spec.parameters && spec.parameters.length) {
-      spec.parameters.forEach(function(param) {
-        if(parameters[param.name] === undefined && param.required) {
-          throw new Error('Missing parameter ' + param.name);
-        }
-        var regex = new RegExp('{' + param.name + '}', 'g');
-        renderedPath = renderedPath.replace(regex, parameters[param.name]);
-        //todo validate parameter existence in options
-        //todo validate parameter meets json schema spec
-      });
-    }
+    var requestURI = handleParameters(spec, path, parameters);
     //todo validate the response using json-schema
-    options.url = options.url + renderedPath;
+    options.url = options.url + requestURI;
     next(options);
   };
 }

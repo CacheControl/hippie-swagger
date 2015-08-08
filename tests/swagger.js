@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports = {
+var swaggerParser = require('swagger-parser');
+
+var schema = {
     "swagger": "2.0",
     "info": {
         "version": "1.0.0",
@@ -57,7 +59,8 @@ module.exports = {
                         "in": "path",
                         "description": "foo identifier",
                         "required": true,
-                        "type": "string"
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
                     }
                 ],
                 "responses": {
@@ -85,7 +88,7 @@ module.exports = {
             "properties": {
                 "id": {
                     "description": "primary identifier",
-                    "$ref": "/uuid",
+                    "$ref": "#/definitions/uuid",
                     "required": true
                 },
                 "description": {
@@ -110,18 +113,25 @@ module.exports = {
                     "properties": {
                         "id": {
                             "description": "primary identifier for this foo",
-                            "$ref": "/uuid",
+                            "$ref": "#/definitions/uuid",
                             "required": true
                         }
                     }
                 }
             ]
         },
-        "/uuid": {
+        "uuid": {
             "title": "UUID",
             "description": "Schema defining structure of a string representation of a uuid.",
             "type": "string",
             "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
-        }
+        },
     }
 };
+
+swaggerParser.parse(schema, function(err, api, metadata) {
+  if(err) throw err;
+  schema = api;
+});
+
+module.exports = schema;

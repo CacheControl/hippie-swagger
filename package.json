@@ -21,9 +21,12 @@
   },
   "homepage": "https://github.com/CacheControl/hippie-swagger#readme",
   "dependencies": {
+    "skeemas": "^1.2.0",
+    "tape-catch": "^1.0.4"
   },
   "devDependencies": {
-    "tape": "^4.0.3",
-    "tap-spec": "^4.0.2"
+    "swagger-parser": "^2.5.0",
+    "tap-spec": "^4.0.2",
+    "tape": "^4.0.3"
   }
 }
