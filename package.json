@@ -20,11 +20,15 @@
     "url": "https://github.com/CacheControl/hippie-swagger/issues"
   },
   "homepage": "https://github.com/CacheControl/hippie-swagger#readme",
+  "peerDependencies": {
+    "hippie": "*"
+  },
   "dependencies": {
     "skeemas": "^1.2.0",
     "tape-catch": "^1.0.4"
   },
   "devDependencies": {
+    "hippie": "^0.3.0",
     "swagger-parser": "^2.5.0",
     "tap-spec": "^4.0.2",
     "tape": "^4.0.3"
