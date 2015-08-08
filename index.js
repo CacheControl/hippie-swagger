@@ -48,7 +48,8 @@ function middleware(swaggerDef, options, next) {
   }
   var pathSpec = swaggerDef.paths[this._url][method];
 
-  //todo validate the response using json-schema
+  this.expect(validateResponse.bind(this, pathSpec));
+
   //default to json
   //if(!pathSpec.consumes || pathSpec.consumes.includes('application/json')) {
   //  //todo - set request options for this.json();
@@ -58,10 +59,17 @@ function middleware(swaggerDef, options, next) {
   next(options);
 }
 
+function validateResponse(pathSpec, res, body, next) {
+  var result = skeemas.validate(body.data, pathSpec.responses['200'].schema);
+
+  if(!result.valid) return next(new Error('Response failed validation against schema (' + schema + '): ' + result.errors[0]));
+
+  next();
+};
+
 module.exports = function(app, swaggerDef) {
   var hip = hippie(app);
-
+  hip.json();
   hip.use(middleware.bind(hip, swaggerDef));
-
   return hip;
 }
