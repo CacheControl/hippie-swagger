@@ -1,3 +1,4 @@
 --require ./test/support/bootstrap.js
 --check-leaks
 --delay
+--globals expect,data,swaggerSchema

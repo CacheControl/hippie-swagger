@@ -6,13 +6,13 @@ var hippie = require('../index'),
 describe('hippie-swagger', function() {
   describe('url parameters', function() {
     it('works with parameter-less urls', function(done) {
-      hippie(app, dereferencedSwaggerSchema)
+      hippie(app, swaggerSchema)
       .get('/foos')
       .end(done);
     });
 
     it('replaces parameters in urls with provided variables', function(done) {
-      hippie(app, dereferencedSwaggerSchema)
+      hippie(app, swaggerSchema)
       .get('/foos/{fooId}')
       .params({ fooId:data.firstFoo.id })
       .end(function(err, res) {
@@ -26,7 +26,7 @@ describe('hippie-swagger', function() {
   describe('path validation', function() {
     it('errors if the path does not exist in the swagger file', function() {
       expect(function() {
-        hippie(app, dereferencedSwaggerSchema)
+        hippie(app, swaggerSchema)
         .get('/bars')
         .end()
       }).throw(/Swagger spec does not define path/);
@@ -34,7 +34,7 @@ describe('hippie-swagger', function() {
 
     it('errors if the path method is not specified in the swagger file', function() {
       expect(function() {
-        hippie(app, dereferencedSwaggerSchema)
+        hippie(app, swaggerSchema)
         .url('/foos')
         .method('/foos')
         .end()

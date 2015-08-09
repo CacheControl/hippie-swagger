@@ -8,6 +8,6 @@ global.data = require('./data');
 
 swaggerParser.parse(swaggerSpec, function(err, api, metadata) {
   if(err) throw err;
-  global.dereferencedSwaggerSchema = api;
+  global.swaggerSchema = api;
   run();
 });
