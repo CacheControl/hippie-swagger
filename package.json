@@ -4,7 +4,7 @@
   "description": "Hippie middleware for swagger driven testing",
   "main": "index.js",
   "scripts": {
-    "test": "mocha $(find test -name *.test.js)"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
