@@ -9,7 +9,10 @@ global.app = require('./server');
 global.hippie = require('../../index');
 
 swaggerParser.parse(swaggerSpec, function(err, api, metadata) {
-  if(err) console.log(err);
+  if(err) {
+    console.error(err);
+    process.exit(1);
+  }
   global.swaggerSchema = api;
   run(err);
 });

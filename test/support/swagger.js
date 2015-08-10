@@ -61,6 +61,17 @@ module.exports = {
                     }
                 },
               }
+            },
+            "post": {
+              "description": "Server returns data that does not validate",
+              "responses": {
+                "201": {
+                    "description": "Server returns data that does not validate",
+                    "schema": {
+                       "$ref": "/foo"
+                    }
+                },
+              }
             }
         },
         "/foos/{fooId}": {
