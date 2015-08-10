@@ -10,18 +10,31 @@ var express = require('express');
 
 var app = express();
 
+
+/*
+ * endpoints w/valid responses
+ */
+
 app.all('/foos', function(req, res) {
   res.send(data.foos);
-});
-
-//valid path with invalid response
-app.all('/invalid-foos', function(req, res) {
-  res.send([{'invalid-foo': true}]);
 });
 
 app.get('/foos/:fooId', function(req, res) {
   res.send(data.firstFoo);
 });
+
+app.post('/foos', function(req, res) {
+  res.send(req.body);
+});
+
+/*
+ * endpoints with invalid response
+ */
+app.all('/invalid-foos', function(req, res) {
+  res.send([{'invalid-foo': true}]);
+});
+
+
 
 /**
  * Primary export.

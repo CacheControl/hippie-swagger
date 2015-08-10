@@ -24,6 +24,7 @@
     "hippie": "*"
   },
   "dependencies": {
+    "object-assign": "^3.0.0",
     "skeemas": "^1.2.0"
   },
   "devDependencies": {

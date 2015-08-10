@@ -1,8 +1,5 @@
 'use strict';
 
-var hippie = require('../index'),
-    app = require('./support/server');
-
 describe('hippie-swagger', function() {
   describe('url parameters', function() {
     it('works with parameter-less urls', function(done) {
@@ -21,10 +18,16 @@ describe('hippie-swagger', function() {
         done();
       });
     });
+    //parameter.test.js
+    it('errors if the parameter fails json-schema validation');
+    it('replaces query string variables');
+    it('replaces header variables');
+    it('replaces body variables');
   });
 
   describe('response validation with swagger json-schema', function() {
     describe('GET requests', function() {
+      it('works if no json-schema is provided for the response');
       it('works when valid', function() {
         hippie(app, swaggerSchema)
         .get('/foos/{fooId}')
@@ -40,6 +43,46 @@ describe('hippie-swagger', function() {
         .get('/invalid-foos')
         .end(function(err) {
           expect(err.message).to.match(/Response from \/invalid-foos failed validation/)
+          done();
+        });
+      });
+    });
+
+    describe('POST requests', function() {
+      it('works when valid', function() {
+        hippie(app, swaggerSchema)
+        .post('/foos')
+        .send({
+          id: '241a4d44-5b90-41fa-9454-5aa6568087e4',
+          description: 'third foo',
+          orderNumber: 3
+        })
+        .end(function(err, res) {
+          expect(err).to.be.undefined;
+          done();
+        });
+      });
+
+      it('errors when the post body is invalid', function(done) {
+        expect(function() {
+          hippie(app, swaggerSchema)
+          .post('/foos')
+          .send({
+            bogus: 'post-body'
+          })
+          .end()
+        }).to.throw(/Invalid format for parameter/);
+        done();
+      });
+
+      xit('errors when the post response is invalid', function(done) {
+        hippie(app, swaggerSchema)
+        .post('/foos')
+        .send({
+          bogus: 'post-body'
+        })
+        .end(function(err) {
+          expect(err.message).to.match(/Post body failed schema validation/)
           done();
         });
       });

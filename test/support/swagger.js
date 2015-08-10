@@ -38,7 +38,7 @@ module.exports = {
                   }
                 ],
                 "responses": {
-                  "200": {
+                  "201": {
                     "description": "Successful response",
                     "schema": {
                         "$ref": "/foo"

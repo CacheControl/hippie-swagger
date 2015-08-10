@@ -5,6 +5,8 @@ var swaggerParser = require('swagger-parser'),
 
 global.expect = require('chai').expect;
 global.data = require('./data');
+global.app = require('./server');
+global.hippie = require('../../index');
 
 swaggerParser.parse(swaggerSpec, function(err, api, metadata) {
   if(err) console.log(err);

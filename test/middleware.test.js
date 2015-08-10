@@ -16,7 +16,7 @@ var ctx = hippieStub();
 describe('middleware', function() {
   it('calls next with options', function() {
     middleware.call(ctx, swaggerSchema, options, function(opts) {
-      expect(opts).to.equal(options);
+      expect(opts).to.eql(options);
     });
   });
 
