@@ -47,6 +47,22 @@ module.exports = {
                 }
             }
         },
+        "/invalid-foos": {
+            "get": {
+              "description": "Server returns data that does not validate",
+              "responses": {
+                "200": {
+                    "description": "Successful response",
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "/foo"
+                      }
+                    }
+                },
+              }
+            }
+        },
         "/foos/{fooId}": {
             "get": {
                 "description": "Retrieving a foo",
@@ -76,19 +92,19 @@ module.exports = {
             "title": "Foo object definition",
             "description": "Schema for a foo object.",
             "type": "object",
+            "required": ["id", "description", "orderNumber"],
             "properties": {
                 "id": {
                     "description": "primary identifier",
-                    "$ref": "#/definitions/uuid",
-                    "required": true
+                    "$ref": "#/definitions/uuid"
                 },
                 "description": {
                     "description": "an explanation of the foo",
-                    "type": "string"
+                    "type": "string",
                 },
                 "orderNumber": {
                     "description": "the order index of the foo",
-                    "type": "integer"
+                    "type": "integer",
                 }
             }
         },
@@ -97,6 +113,6 @@ module.exports = {
             "description": "Schema defining structure of a string representation of a uuid.",
             "type": "string",
             "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
-        },
+        }
     }
 };

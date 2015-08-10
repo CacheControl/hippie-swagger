@@ -23,22 +23,26 @@ describe('hippie-swagger', function() {
     });
   });
 
-  describe('path validation', function() {
-    it('errors if the path does not exist in the swagger file', function() {
-      expect(function() {
+  describe('response validation with swagger json-schema', function() {
+    describe('GET requests', function() {
+      it('works when valid', function() {
         hippie(app, swaggerSchema)
-        .get('/bars')
-        .end()
-      }).throw(/Swagger spec does not define path/);
-    });
+        .get('/foos/{fooId}')
+        .params({ fooId:data.firstFoo.id })
+        .end(function(err, res) {
+          expect(err).to.be.undefined;
+          done();
+        });
+      });
 
-    it('errors if the path method is not specified in the swagger file', function() {
-      expect(function() {
+      it('errors when the response is invalid', function(done) {
         hippie(app, swaggerSchema)
-        .url('/foos')
-        .method('/foos')
-        .end()
-      }).throw(/Swagger spec does not define method/);
+        .get('/invalid-foos')
+        .end(function(err) {
+          expect(err.message).to.match(/Response from \/invalid-foos failed validation/)
+          done();
+        });
+      });
     });
   });
 });

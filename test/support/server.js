@@ -14,6 +14,11 @@ app.all('/foos', function(req, res) {
   res.send(data.foos);
 });
 
+//valid path with invalid response
+app.all('/invalid-foos', function(req, res) {
+  res.send([{'invalid-foo': true}]);
+});
+
 app.get('/foos/:fooId', function(req, res) {
   res.send(data.firstFoo);
 });
