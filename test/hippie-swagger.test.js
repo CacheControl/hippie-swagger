@@ -53,13 +53,13 @@ describe('hippie-swagger', function() {
       });
 
       it('errors when the post response is invalid', function(done) {
-          hippie(app, swaggerSchema)
-          .post('/invalid-foos')
-          .send(validPostBody)
-          .end(function(err) {
-            expect(err.message).to.match(/Response from \/invalid-foos failed validation/);
-            done();
-          });
+        hippie(app, swaggerSchema)
+        .post('/invalid-foos')
+        .send(validPostBody)
+        .end(function(err) {
+          expect(err.message).to.match(/Response from \/invalid-foos failed validation/);
+          done();
+        });
       });
     });
   });

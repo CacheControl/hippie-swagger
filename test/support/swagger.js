@@ -12,6 +12,22 @@ module.exports = {
         "/foos": {
             "get": {
               "description": "List all foos",
+              "parameters": [
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "resultset limiter for pagination",
+                    "required": false,
+                    "type": "number",
+                },
+                {
+                    "name": "offset",
+                    "in": "query",
+                    "description": "resultset offset for pagination",
+                    "required": false,
+                    "type": "number",
+                }
+            ],
               "responses": {
                 "200": {
                     "description": "Successful response",
@@ -59,7 +75,7 @@ module.exports = {
                           "$ref": "/foo"
                       }
                     }
-                },
+                }
               }
             },
             "post": {
@@ -71,7 +87,18 @@ module.exports = {
                        "$ref": "/foo"
                     }
                 },
-              }
+              },
+              "parameters": [
+                  {
+                    "in": "body",
+                    "name": "body",
+                    "description": "foo object to be added",
+                    "required": true,
+                    "schema": {
+                        "$ref": "/foo"
+                    }
+                  }
+                ],
             }
         },
         "/foos/{fooId}": {

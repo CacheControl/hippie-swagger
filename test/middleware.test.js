@@ -2,13 +2,17 @@
 
 var middleware = require('../lib/middleware'),
     next = new Function(),
-    options = { method: 'get' };
+    options = { method: 'get', url: '/foos' };
 
 function hippieStub(options) {
   options = options || {};
   return new function() {
     this._url = options.url || '/foos';
     this.expect = new Function();
+    this.swaggerParams = {
+      limit: 0,
+      offset: 0
+    };
   }
 }
 var ctx = hippieStub();
@@ -21,7 +25,7 @@ describe('middleware', function() {
   });
 
   it('accepts mixed-case request methods', function() {
-    middleware.call(ctx, swaggerSchema, {method: 'GET'}, function(opts) {
+    middleware.call(ctx, swaggerSchema, { method:'GET', url:'/foos' }, function(opts) {
       expect(opts).to.exist;
     });
   });
