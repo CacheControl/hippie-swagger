@@ -1,30 +1,6 @@
 'use strict';
 
 describe('hippie-swagger', function() {
-  describe('url parameters', function() {
-    it('works with parameter-less urls', function(done) {
-      hippie(app, swaggerSchema)
-      .get('/foos')
-      .end(done);
-    });
-
-    it('replaces parameters in urls with provided variables', function(done) {
-      hippie(app, swaggerSchema)
-      .get('/foos/{fooId}')
-      .params({ fooId:data.firstFoo.id })
-      .end(function(err, res) {
-        expect(err).to.be.undefined;
-        expect(res.req.path).to.equal('/foos/' + data.firstFoo.id);
-        done();
-      });
-    });
-    //parameter.test.js
-    it('errors if the parameter fails json-schema validation');
-    it('replaces query string variables');
-    it('replaces header variables');
-    it('replaces body variables');
-  });
-
   describe('response validation with swagger json-schema', function() {
     describe('GET requests', function() {
       it('works if no json-schema is provided for the response');
