@@ -7,14 +7,6 @@ describe('url parameters', function() {
     .end(done);
   });
 
-  it('errors if a required parameter is missing', function() {
-    expect(function() {
-      hippie(app, swaggerSchema)
-      .get('/foos/{fooId}')
-      .end();
-    }).to.throw(/Missing required parameter in path: fooId/);
-  });
-
   it('replaces path parameters with provided variables', function(done) {
     hippie(app, swaggerSchema)
     .get('/foos/{fooId}')
@@ -24,15 +16,6 @@ describe('url parameters', function() {
       expect(res.req.path).to.equal('/foos/' + data.firstFoo.id);
       done();
     });
-  });
-
-  it('errors if a parameter fails json-schema validation', function() {
-    expect(function() {
-      hippie(app, swaggerSchema)
-      .get('/foos/{fooId}')
-      .pathParams({ fooId:45 })
-      .end()
-    }).to.throw(/Invalid format for parameter {fooId}/);
   });
 
   it('replaces query string variables', function(done) {
@@ -78,12 +61,31 @@ describe('url parameters', function() {
     });
   });
 
-  it('errors if extra parameters are provided which are not mentioned in the swagger spec', function() {
-    expect(function() {
-      hippie(app, swaggerSchema)
-      .get('/foos')
-      .pathParams({ asdf: 50 })
-      .end();
-    }).to.throw(/Parameter not mentioned in swagger spec: "asdf"/);
+  describe('errors', function() {
+    it('when a required parameter is missing', function() {
+      expect(function() {
+        hippie(app, swaggerSchema)
+        .get('/foos/{fooId}')
+        .end();
+      }).to.throw(/Missing required parameter in path: fooId/);
+    });
+
+    it('when a parameter fails json-schema validation', function() {
+      expect(function() {
+        hippie(app, swaggerSchema)
+        .get('/foos/{fooId}')
+        .pathParams({ fooId:45 })
+        .end()
+      }).to.throw(/Invalid format for parameter {fooId}/);
+    });
+
+    it('when extra parameters are provided which are not mentioned in the swagger spec', function() {
+      expect(function() {
+        hippie(app, swaggerSchema)
+        .get('/foos')
+        .pathParams({ asdf: 50 })
+        .end();
+      }).to.throw(/Parameter not mentioned in swagger spec: "asdf"/);
+    });
   });
 });
