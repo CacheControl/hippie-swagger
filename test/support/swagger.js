@@ -26,6 +26,13 @@ module.exports = {
                     "description": "resultset offset for pagination",
                     "required": false,
                     "type": "number",
+                },
+                {
+                    "name": "X-Total-Count",
+                    "in": "header",
+                    "description": "header example",
+                    "required": false,
+                    "type": "number",
                 }
             ],
               "responses": {

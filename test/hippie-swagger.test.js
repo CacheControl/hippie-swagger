@@ -7,7 +7,7 @@ describe('hippie-swagger', function() {
       it('works when valid', function() {
         hippie(app, swaggerSchema)
         .get('/foos/{fooId}')
-        .params({ fooId:data.firstFoo.id })
+        .pathParams({ fooId:data.firstFoo.id })
         .end(function(err, res) {
           expect(err).to.be.undefined;
           done();
