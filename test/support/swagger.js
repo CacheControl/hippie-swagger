@@ -106,6 +106,14 @@ module.exports = {
                     }
                   }
                 ],
+            },
+            "delete": {
+                "description": "Server returns data that does not validate",
+                "responses": {
+                    "204": {
+                        "description": "Deleted. No content",
+                    }
+                }
             }
         },
         "/foos/{fooId}": {
@@ -127,6 +135,24 @@ module.exports = {
                         "schema": {
                             "$ref": "/foo"
                         }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deleting a foo",
+                "parameters": [
+                    {
+                        "name": "fooId",
+                        "in": "path",
+                        "description": "foo identifier",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted. No content",
                     }
                 }
             }

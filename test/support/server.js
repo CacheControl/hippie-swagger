@@ -22,10 +22,14 @@ app.all('/foos', function(req, res) {
 app.get('/foos/:fooId', function(req, res) {
   res.send(data.firstFoo);
 });
+app.delete('/foos/:fooId', function(req, res) {
+  res.status(204).end();
+});
 
 app.post('/foos', function(req, res) {
   res.send(req.body);
 });
+
 
 /*
  * endpoints with invalid response

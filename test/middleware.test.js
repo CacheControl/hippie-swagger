@@ -34,7 +34,7 @@ describe('middleware', function() {
     it('when the path is not defined in the swagger schema', function() {
       var pathCtx = hippieStub({url: 'pathNotMentionedInSwagger'});
       expect(middleware.bind(pathCtx, swaggerSchema, options, next))
-        .to.throw(/Swagger spec does not define path/);
+        .to.throw(/Swagger spec does not define path: pathNotMentionedInSwagger/);
     });
 
     it('when the options is missing a method', function() {
@@ -44,7 +44,7 @@ describe('middleware', function() {
 
     it('when the request method is not defined in the swagger schema', function() {
       expect(middleware.bind(ctx, swaggerSchema, {method: 'put'}, next))
-        .to.throw(/Swagger spec does not define method/);
+        .to.throw(/Swagger spec does not define method: "put"/);
     });
   });
 });
