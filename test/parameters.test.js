@@ -15,7 +15,7 @@ describe('url parameters', function() {
     }).to.throw(/Missing required parameter in path: fooId/);
   });
 
-  it('replaces parameters in urls with provided variables', function(done) {
+  it('replaces path parameters with provided variables', function(done) {
     hippie(app, swaggerSchema)
     .get('/foos/{fooId}')
     .pathParams({ fooId:data.firstFoo.id })
@@ -26,7 +26,7 @@ describe('url parameters', function() {
     });
   });
 
-  it('errors if the parameter fails json-schema validation', function() {
+  it('errors if a parameter fails json-schema validation', function() {
     expect(function() {
       hippie(app, swaggerSchema)
       .get('/foos/{fooId}')
@@ -47,14 +47,17 @@ describe('url parameters', function() {
       done();
     });
   });
+
   describe('header variables', function() {
     it('errors if the header is required', function() {
       var objectAssign = require('object-assign'),
           headerSchema = objectAssign({}, swaggerSchema);
 
+      //set X-Total-Count to be required for this test
       headerSchema["paths"]["/foos"]["get"]["parameters"].filter(function(param) {
         return param.name == 'X-Total-Count';
       })[0]["required"] = true;
+
       expect(function() {
         hippie(app, headerSchema)
         .get('/foos')
@@ -75,11 +78,6 @@ describe('url parameters', function() {
     });
   });
 
-  //todo - rename path variables tests to align with below
-  it('only replaces queryParams in the querystring');
-  it('only replaces bodyParams in the post body');
-  it('only replaces headerParams in the header');
-  it('replaces body variables');
   it('errors if extra parameters are provided which are not mentioned in the swagger spec', function() {
     expect(function() {
       hippie(app, swaggerSchema)
@@ -88,5 +86,4 @@ describe('url parameters', function() {
       .end();
     }).to.throw(/Parameter not mentioned in swagger spec: "asdf"/);
   });
-  it('errors if a parameter is not provided');
 });
