@@ -31,21 +31,6 @@ describe('url parameters', function() {
     });
   });
 
-  xit('treats query and path as unique namespaces', function(done) {
-    var fooId = 'fizz', fooId2 = 'buzz';
-
-    hippie(app, swaggerSchema)
-    .get('/foos/{fooId}?fooId={fooId}')
-    .queryParams({ fooId:fooId })
-    .pathParams({ fooId:fooId2 })
-    .end(function(err, res) {
-      expect(err).to.be.undefined;
-      expect(res.req.path).to.equal('/foos?limit=' + limit + '&offset=' + offset);
-      done();
-    });
-  });
-
-
   describe('header variables', function() {
     it('errors if the header is required', function() {
       var objectAssign = require('object-assign'),
