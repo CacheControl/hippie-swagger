@@ -1,7 +1,7 @@
 'use strict';
 
 describe('GET requests', function() {
-  it('works when valid', function() {
+  it('works when valid', function(done) {
     hippie(app, swaggerSchema)
     .get('/foos/{fooId}')
     .pathParams({ fooId:data.firstFoo.id })

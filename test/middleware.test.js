@@ -5,14 +5,15 @@ var middleware = require('../lib/middleware'),
     options = { method: 'get', url: '/foos' };
 
 function hippieStub(options) {
-  options = options || {};
+  options = options || {
+    qs: {
+      limit: 0,
+      offset: 0
+    }
+  };
   return new function() {
     this._url = options.url || '/foos';
     this.expect = new Function();
-    this.swaggerParams = {
-      limit: 0,
-      offset: 0
-    };
   }
 }
 var ctx = hippieStub();
