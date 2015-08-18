@@ -4,6 +4,7 @@ describe('POST requests', function() {
     description: 'third foo',
     orderNumber: 3
   };
+
   it('works when valid', function() {
     hippie(app, swaggerSchema)
     .post('/foos')

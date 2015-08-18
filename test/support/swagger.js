@@ -110,8 +110,16 @@ module.exports = {
             "delete": {
                 "description": "Server returns data that does not validate",
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": "Deleted. No content",
+                    }
+                }
+            },
+            "put": {
+                "description": "Server returns data that does not validate",
+                "responses": {
+                    "204": {
+                        "description": "Updated.  No content.",
                     }
                 }
             }
