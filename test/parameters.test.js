@@ -22,14 +22,29 @@ describe('url parameters', function() {
     var limit = 10, offset = 2;
 
     hippie(app, swaggerSchema)
-    .get('/foos?limit={limit}&offset={offset}')
-    .queryParams({ limit:limit, offset:offset })
+    .get('/foos')
+    .qs({ limit:limit, offset:offset })
     .end(function(err, res) {
       expect(err).to.be.undefined;
       expect(res.req.path).to.equal('/foos?limit=' + limit + '&offset=' + offset);
       done();
     });
   });
+
+  xit('treats query and path as unique namespaces', function(done) {
+    var fooId = 'fizz', fooId2 = 'buzz';
+
+    hippie(app, swaggerSchema)
+    .get('/foos/{fooId}?fooId={fooId}')
+    .queryParams({ fooId:fooId })
+    .pathParams({ fooId:fooId2 })
+    .end(function(err, res) {
+      expect(err).to.be.undefined;
+      expect(res.req.path).to.equal('/foos?limit=' + limit + '&offset=' + offset);
+      done();
+    });
+  });
+
 
   describe('header variables', function() {
     it('errors if the header is required', function() {
