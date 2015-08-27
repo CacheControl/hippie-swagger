@@ -1,7 +1,7 @@
 {
   "name": "hippie-swagger",
   "version": "1.0.0",
-  "description": "Hippie middleware for swagger driven testing",
+  "description": "Hippie wrapper that provides end to end API testing with swagger validation",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
