@@ -10,7 +10,7 @@ _"The confident hippie"_
 
 * All [hippie](https://github.com/vesln/hippie) features included via peer-dependency
 * Guarantees application is in sync with swagger definition
-* Parameters and responses validated against swagger json-schema
+* Parameters and responses validated against swagger format
 * Support for path, query string, header, and body variables
 
 ## Installation
@@ -41,7 +41,7 @@ hippie(app, swagger)          //dereferenced swagger file as a second argument
 ## Usage
 * When specifying a url(.get, .post, .patch, .url, etc), use the [swagger path](http://swagger.io/specification/#pathsObject)
 * If the url contains a variable, hippie-swagger will prompt you define them with [pathParams](#pathparams)
-* These caveats aside, use hippie as you normally would.
+* These aside, use hippie as you normally would.
 
 ### #pathParams
 The only method added by hippie-swagger.  Replaces variables contained in the swagger path.
@@ -71,23 +71,69 @@ Below are list of some of the validations that hippie-swagger checks for:
 ```js
 hippie(app, swagger)
 .get('/pathNotMentionedInSwagger')
-.end(function(err, res, body) {
-  if (err) throw err;
-});
-// throws:
-//  Swagger spec does not define path: pathNotMentionedInSwagger
+.end(fn);
+// path does not exist in swagger file; throws:
+//    Swagger spec does not define path: pathNotMentionedInSwagger
 ```
 
-### Parameters
+### Parameter format
+```js
+hippie(app, swagger)
+.get('/users/{userId}')
+.pathParams({
+  userId: 'string-value',
+})
+.end(fn);
+// userId provided as a string, but swagger specifies it as an integer; throws:
+//    Invalid format for parameter {userId}
+```
+
+### Required Parameters
 ```js
 hippie(app, swagger)
 .get('/users/{username}')
+.end(fn);
+// "username" is marked 'required' in swagger file; throws:
+//    Missing required parameter in path: username
+```
+
+### Extraneous Parameters
+```js
+hippie(app, swagger)
+.get('/users')
 .pathParams({
-  username: 123,
+  extraParam: 'will-throw',
 })
-.end(function(err, res, body) {
-  if (err) throw err;
-});
-// throws:
-//   Invalid format for parameter {username}
+.end(fn);
+// "extraParam" not mentioned swagger file; throws:
+//    Parameter not mentioned in swagger spec: "extraParam"
+```
+
+### Response format
+```js
+hippie(app, swagger)
+.get('/users')
+.end(fn);
+// body failed to validate against swagger file's "response" schema; throws:
+//    Response from /users failed validation: [failure description]
+```
+
+### Method validation
+```js
+hippie(app, swagger)
+.post('/users')
+.end(fn);
+// "post" method not mentioned in swagger file; throws:
+//    Swagger spec does not define method: "post" in path /users
+```
+
+### Post body format
+```js
+hippie(app, swagger)
+.post('/users')
+.send({"bogus":"post-body"})
+.end(fn);
+
+// post body fails to validate against swagger file's "body" parameter; throws:
+//    Invalid format for parameter {body}, received: {"bogus":"post-body"}
 ```
