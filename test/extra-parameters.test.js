@@ -10,6 +10,26 @@ describe('extra parameters', function() {
     }).to.throw(/Parameter not mentioned in swagger spec: "asdf"/);
   });
 
+  describe('header parameters', function() {
+    it('does not error if the header was not mentioned in swagger', function() {
+      expect(function() {
+        hippie(app, swaggerSchema)
+        .header("X-New-Header", 1)
+        .get('/foos')
+        .end();
+      }).to.not.throw()
+    });
+
+    it('errors if the header was not mentioned in swagger, and errorOnExtraHeaderParameters is true', function() {
+      expect(function() {
+        hippie(app, swaggerSchema, { errorOnExtraHeaderParameters:true })
+        .header("X-New-Header", 1)
+        .get('/foos')
+        .end();
+      }).to.throw(/Parameter not mentioned in swagger spec:/)
+    });
+  });
+
   describe('settings', function() {
     it('when validateParameterSchema is off, extra parameters are allowed', function() {
       expect(function() {
