@@ -41,10 +41,11 @@ hippie(app, swagger)          //dereferenced swagger file as a second argument
 ## Usage
 * When specifying a url(.get, .post, .patch, .url, etc), use the [swagger path](http://swagger.io/specification/#pathsObject)
 * If the url contains a variable, hippie-swagger will prompt you define them with [pathParams](#pathparams)
+* Hippie's .json() method is called automatically on every request
 * These aside, use hippie as you normally would.
 
 ### #pathParams
-The only method added by hippie-swagger.  Replaces variables contained in the swagger path.
+Replaces variables contained in the swagger path.
 
 ```js
 hippie(app, swagger)

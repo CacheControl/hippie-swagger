@@ -88,4 +88,24 @@ describe('url parameters', function() {
       }).to.throw(/Parameter not mentioned in swagger spec: "asdf"/);
     });
   });
+
+  describe('settings', function() {
+    it('when validateParameterSchema is off, it does not error if parameter fails json-schema validation', function() {
+      expect(function() {
+        hippie(app, swaggerSchema, { validateParameterSchema:false })
+        .get('/foos/{fooId}')
+        .pathParams({ fooId:45 })
+        .end()
+      }).to.not.throw();
+    });
+
+    it('when extra parameters are provided which are not mentioned in the swagger spec', function() {
+      expect(function() {
+        hippie(app, swaggerSchema, { errorOnExtraParameters:false })
+        .get('/foos/{fooId}')
+        .pathParams({ fooId:data.firstFoo.id, asdf:50 })
+        .end();
+      }).to.not.throw();
+    });
+  });
 });
