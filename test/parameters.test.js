@@ -78,15 +78,6 @@ describe('url parameters', function() {
         .end()
       }).to.throw(/Invalid format for parameter {fooId}/);
     });
-
-    it('when extra parameters are provided which are not mentioned in the swagger spec', function() {
-      expect(function() {
-        hippie(app, swaggerSchema)
-        .get('/foos')
-        .pathParams({ asdf: 50 })
-        .end();
-      }).to.throw(/Parameter not mentioned in swagger spec: "asdf"/);
-    });
   });
 
   describe('settings', function() {
@@ -96,15 +87,6 @@ describe('url parameters', function() {
         .get('/foos/{fooId}')
         .pathParams({ fooId:45 })
         .end()
-      }).to.not.throw();
-    });
-
-    it('when extra parameters are provided which are not mentioned in the swagger spec', function() {
-      expect(function() {
-        hippie(app, swaggerSchema, { errorOnExtraParameters:false })
-        .get('/foos/{fooId}')
-        .pathParams({ fooId:data.firstFoo.id, asdf:50 })
-        .end();
       }).to.not.throw();
     });
   });
