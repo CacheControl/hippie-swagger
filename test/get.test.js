@@ -20,8 +20,8 @@ describe('GET requests', function() {
     });
   });
 
-  it('does not error if the validateResponse is off', function(done) {
-    hippie(app, swaggerSchema, { validateResponse:false })
+  it('does not error if the validateResponseSchema is off', function(done) {
+    hippie(app, swaggerSchema, { validateResponseSchema:false })
     .get('/invalid-foos')
     .end(function(err) {
       expect(err).be.undefined
