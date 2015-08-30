@@ -16,7 +16,7 @@ _"The confident hippie"_
 ## Installation
 
 ```
-npm install hippie-swagger
+npm install hippie-swagger --save-dev
 ```
 
 ## Basic Usage
