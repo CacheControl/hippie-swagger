@@ -1,4 +1,4 @@
-![hippie-swagger](http://i.imgur.com/t3gJrQ1.png)
+![hippie-swagger](http://i.imgur.com/icjd94P.png)
 
 _"The confident hippie"_
 
