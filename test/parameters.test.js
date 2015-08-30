@@ -78,14 +78,16 @@ describe('url parameters', function() {
         .end()
       }).to.throw(/Invalid format for parameter {fooId}/);
     });
+  });
 
-    it('when extra parameters are provided which are not mentioned in the swagger spec', function() {
+  describe('settings', function() {
+    it('when validateParameterSchema is off, it does not error if parameter fails json-schema validation', function() {
       expect(function() {
-        hippie(app, swaggerSchema)
-        .get('/foos')
-        .pathParams({ asdf: 50 })
-        .end();
-      }).to.throw(/Parameter not mentioned in swagger spec: "asdf"/);
+        hippie(app, swaggerSchema, { validateParameterSchema:false })
+        .get('/foos/{fooId}')
+        .pathParams({ fooId:45 })
+        .end()
+      }).to.not.throw();
     });
   });
 });

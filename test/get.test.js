@@ -19,4 +19,13 @@ describe('GET requests', function() {
       done();
     });
   });
+
+  it('does not error if the validateResponseSchema is off', function(done) {
+    hippie(app, swaggerSchema, { validateResponseSchema:false })
+    .get('/invalid-foos')
+    .end(function(err) {
+      expect(err).be.undefined
+      done();
+    });
+  });
 });
