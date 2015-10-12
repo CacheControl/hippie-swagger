@@ -8,7 +8,7 @@ global.data = require('./data');
 global.app = require('./server');
 global.hippie = require('../../index');
 
-swaggerParser.parse(swaggerSpec, function(err, api, metadata) {
+swaggerParser.dereference(swaggerSpec, function(err, api, metadata) {
   if(err) {
     console.error(err);
     process.exit(1);

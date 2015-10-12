@@ -37,7 +37,7 @@ module.exports = {
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "/foo"
+                "$ref": "#/definitions/foo"
               }
             }
           },
@@ -51,14 +51,14 @@ module.exports = {
           "description": "foo object to be added",
           "required": true,
           "schema": {
-            "$ref": "/foo"
+            "$ref": "#/definitions/foo"
           }
         }],
         "responses": {
           "201": {
             "description": "Successful response",
             "schema": {
-              "$ref": "/foo"
+              "$ref": "#/definitions/foo"
             }
           }
         }
@@ -73,7 +73,7 @@ module.exports = {
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "/foo"
+                "$ref": "#/definitions/foo"
               }
             }
           }
@@ -85,7 +85,7 @@ module.exports = {
           "200": {
             "description": "Server returns data that does not validate",
             "schema": {
-              "$ref": "/foo"
+              "$ref": "#/definitions/foo"
             }
           },
         },
@@ -95,7 +95,7 @@ module.exports = {
           "description": "foo object to be added",
           "required": true,
           "schema": {
-            "$ref": "/foo"
+            "$ref": "#/definitions/foo"
           }
         }],
       },
@@ -131,7 +131,7 @@ module.exports = {
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "/foo"
+              "$ref": "#/definitions/foo"
             }
           }
         }
@@ -155,7 +155,7 @@ module.exports = {
     }
   },
   "definitions": {
-    "/foo": {
+    "foo": {
       "title": "Foo object definition",
       "description": "Schema for a foo object.",
       "type": "object",

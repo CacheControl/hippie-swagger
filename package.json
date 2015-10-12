@@ -32,6 +32,6 @@
     "express": "^4.13.3",
     "hippie": "^0.3.0",
     "mocha": "^2.2.5",
-    "swagger-parser": "^2.5.0"
+    "swagger-parser": "^3.3.0"
   }
 }
