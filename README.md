@@ -9,7 +9,7 @@ _"The confident hippie"_
 ## Features
 
 * All [hippie](https://github.com/vesln/hippie) features included via peer-dependency
-* Guarantees application is in sync with swagger definition
+* Ensures application is in sync with swagger definition
 * Parameters and responses validated against swagger format
 * Support for path, query string, header, and body variables
 
@@ -25,13 +25,13 @@ npm install hippie-swagger --save-dev
 var hippie = require('hippie-swagger'),
     swagger = require('your-swagger-file');
 
-hippie(app, swagger)          //dereferenced swagger file as a second argument
-.get('/users/{username}')     //verbs work as before, except use the swagger path
-.pathParams({                 //new method, used to replace variables in the path
+hippie(app, swagger)
+.get('/users/{username}')
+.pathParams({
   username: 'cachecontrol'
 })
-.expectStatus(200)            //status codes must exist in the swagger file
-.expectValue('user.first', 'John')  //hippie expectations work as usual
+.expectStatus(200)
+.expectValue('user.first', 'John')
 .expectHeader('cache-control', 'no-cache')
 .end(function(err, res, body) {
   if (err) throw err;
@@ -40,7 +40,7 @@ hippie(app, swagger)          //dereferenced swagger file as a second argument
 
 ## Usage
 * When specifying a url(.get, .post, .patch, .url, etc), use the [swagger path](http://swagger.io/specification/#pathsObject)
-* If the url contains a variable, hippie-swagger will prompt you define them with [pathParams](#pathparams)
+* If the url contains a variable, hippie-swagger will prompt you define them using [pathParams](#pathparams)
 * Hippie's .json() method is called automatically on every request
 * These aside, use hippie as you normally would.
 
@@ -57,8 +57,6 @@ hippie(app, swagger)
 .end(fn);
 ```
 
-
-
 ## Options
 
 To customize behavior, an ```options``` hash may be passed as a third argument:
@@ -72,9 +70,9 @@ var options = {
 hippie(app, swagger, options)
 ```
 
-```validateResponseSchema``` - Validate the swagger response's json-schema against the server response (default: ```true```)
+```validateResponseSchema``` - Validate the server's response against the swagger json-schema definition (default: ```true```)
 
-```validateParameterSchema``` - Validate the swagger parameter's json-schema against the server response (default: ```true```)
+```validateParameterSchema``` - Validate the request parameters against the swagger json-schema definition (default: ```true```)
 
 ```errorOnExtraParameters``` - Throw an error if a parameter is missing from the swagger file  (default: ```true```)
 
@@ -86,7 +84,7 @@ See the [example](example/index.js) folder
 
 ## Validations
 
-When hippie-swagger detects it is interacting with the app in ways not specified in the swagger file, it will let you know by throwing an error.  The idea is to use hippie's core features to write API tests(as you normally would), and hippie-swagger will only interject if the swagger definition falls behind or becomes out of sync.
+When hippie-swagger detects it is interacting with the app in ways not specified in the swagger file, it will throw an error and fail the test.  The idea is to use hippie's core features to write API tests as per usual, and hippie-swagger will only interject if the swagger definition is violated.
 
 Below are list of some of the validations that hippie-swagger checks for:
 
@@ -160,3 +158,13 @@ hippie(app, swagger)
 // post body fails to validate against swagger file's "body" parameter; throws:
 //    Invalid format for parameter {body}, received: {"bogus":"post-body"}
 ```
+
+## Troubleshooting
+
+The most common mistake is forgetting to dereference the swagger file:
+
+```js
+"'Error: cant resolve reference ...'
+```
+
+Dereferencing can be accomplished using [swagger-parser](https://github.com/BigstickCarpet/swagger-parser/blob/master/docs/swagger-parser.md#dereferenceapi-options-callback).  Also, see the [example](example/index.js).
