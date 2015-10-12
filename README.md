@@ -81,8 +81,8 @@ hippie(app, swagger, options)
 ```errorOnExtraHeaderParameters``` - Throw an error if a request header is missing from the swagger file.  By default this is turned off, because it results in every request needing to specify the "Content-Type" and "Accept" headers, which quickly becomes verbose. (default: ```false```)
 
 
-## Examples
-See the examples folder
+## Example
+See the [example](example/index.js) folder
 
 ## Validations
 

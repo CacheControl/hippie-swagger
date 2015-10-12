@@ -1,0 +1,56 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Example swagger file with $refs",
+    "version": "1.0.0",
+    "title": "Hippie Swagger"
+  },
+  "paths": {
+    "/tags/{tagId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tagId",
+            "in": "path",
+            "description": "tag identifier",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "http://petstore.swagger.io/v2/swagger.json#/definitions/Tag"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tags/invalidResponse": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "http://petstore.swagger.io/v2/swagger.json#/definitions/Tag"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
