@@ -47,7 +47,8 @@ module.exports = {
         "description": "Create a foo",
         "parameters": [{
           "in": "body",
-          "name": "body",
+          //Swagger spec: "The name of the body parameter has no effect on the parameter itself"
+          "name": "name-irrelevant",
           "description": "foo object to be added",
           "required": true,
           "schema": {
