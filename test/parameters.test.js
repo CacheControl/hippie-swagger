@@ -72,21 +72,49 @@ describe('parameters', function() {
         .pathParams({ fooId:data.firstFoo.id })
         .end(done);
       });
+
+      describe('required file', function() {
+        var formSchema;
+        before(function() {
+          formSchema = cloneSwagger(swaggerSchema)
+          //set parameter to be required for this test
+          formSchema["paths"]["/foos/{fooId}"]["post"]["parameters"].filter(function(param) {
+            return param.name == 'uploadedFile';
+          })[0]["required"] = true;
+        });
+
+        it('errors if file is required & missing header and body', function() {
+          expect(function() {
+            hippie(app, formSchema)
+            .post('/foos/{fooId}')
+            .pathParams({ fooId:data.firstFoo.id })
+            .end()
+          }).to.throw(/Missing required parameter in formData: uploadedFile/)
+        })
+
+        it('errors if file is required & missing body', function() {
+          expect(function() {
+            hippie(app, formSchema)
+            .header('Content-Type','multipart/form-data')
+            .post('/foos/{fooId}')
+            .pathParams({ fooId:data.firstFoo.id })
+            .end()
+          }).to.throw(/Missing required parameter in formData: uploadedFile/)
+        })
+      })
     })
 
     describe('urlencoded', function() {
-      it('works if formData is optional', function(done) {
+      it('works if formData is optional & not provided', function(done) {
         hippie(app, swaggerSchema)
         .form()
-        .send({ formMetadata: 'formMetadataValue' })
         .get('/foos')
         .end(done);
       });
 
       it('works if formData is required & present', function(done) {
+        //set formMetadata to be required for this test
         var formSchema = cloneSwagger(swaggerSchema);
-
-        //set parameter to be required for this test
         formSchema["paths"]["/foos"]["get"]["parameters"].filter(function(param) {
           return param.name == 'formMetadata';
         })[0]["required"] = true;

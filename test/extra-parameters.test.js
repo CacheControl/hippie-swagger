@@ -10,14 +10,37 @@ describe('extra parameters', function() {
     }).to.throw(/Parameter not mentioned in swagger spec: "unmentionedParam"/);
   });
 
-  it('errors on formData parameters not mentioned in the swagger spec', function() {
+  describe('formData', function() {
+    it('errors on formData parameters not mentioned in the swagger spec', function() {
+      expect(function() {
+        hippie(app, swaggerSchema)
+        .get('/foos')
+        .form()
+        .send({unmentionedParam1: 'nothing', unmentionedParam2: 'nothing'})
+        .end();
+      }).to.throw(/Parameter not mentioned in swagger spec: "unmentionedParam1"/);
+    });
+
+    it('errors on formData file parameters not mentioned in the swagger spec', function() {
+      var file = 'Content-Disposition: form-data; name="uploadedFile"';
+
+      expect(function() {
+        hippie(app, swaggerSchema)
+        .header('Content-Type','multipart/form-data')
+        .send(file)
+        .get('/foos')
+        .end();
+      }).to.throw(/Parameter not mentioned in swagger spec: ""Content-Disposition/);
+    });
+  })
+
+  it('errors on body parameters not mentioned in the swagger spec', function() {
     expect(function() {
       hippie(app, swaggerSchema)
       .get('/foos')
-      .form()
-      .send({unmentionedParam1: 'nothing', unmentionedParam2: 'nothing'})
+      .send({unmentionedParam1: 'nothing'})
       .end();
-    }).to.throw(/Parameter not mentioned in swagger spec: "unmentionedParam1"/);
+    }).to.throw(/Request "body" present, but Swagger spec has no body parameter mentioned/);
   });
 
   describe('header parameters', function() {
