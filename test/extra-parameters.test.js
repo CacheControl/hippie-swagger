@@ -1,13 +1,23 @@
 'use strict';
 
 describe('extra parameters', function() {
-  it('errors on parameters not mentioned in the swagger spec', function() {
+  it('errors on path parameters not mentioned in the swagger spec', function() {
     expect(function() {
       hippie(app, swaggerSchema)
       .get('/foos')
-      .pathParams({ asdf: 50 })
+      .pathParams({ unmentionedParam: 50 })
       .end();
-    }).to.throw(/Parameter not mentioned in swagger spec: "asdf"/);
+    }).to.throw(/Parameter not mentioned in swagger spec: "unmentionedParam"/);
+  });
+
+  it('errors on formData parameters not mentioned in the swagger spec', function() {
+    expect(function() {
+      hippie(app, swaggerSchema)
+      .get('/foos')
+      .form()
+      .send({unmentionedParam1: 'nothing', unmentionedParam2: 'nothing'})
+      .end();
+    }).to.throw(/Parameter not mentioned in swagger spec: "unmentionedParam1"/);
   });
 
   describe('header parameters', function() {

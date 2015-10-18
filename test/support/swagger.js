@@ -30,6 +30,12 @@ module.exports = {
           "description": "header example",
           "required": false,
           "type": "number",
+        },{
+          "name": "formMetadata",
+          "in": "formData",
+          "description": "Additional data to pass to server",
+          "required": false,
+          "type": "string",
         }],
         "responses": {
           "200": {
@@ -136,6 +142,31 @@ module.exports = {
             }
           }
         }
+      },
+      "post": {
+        "description": "Upload file example",
+        consumes: [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "201": {
+            "description": "noop"
+          },
+        },
+        "parameters": [{
+          "name": "fooId",
+          "in": "path",
+          "description": "foo identifier",
+          "required": true,
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
+        },{
+          "in": "formData",
+          "name": "uploadedFile",
+          "type": "file",
+          "description": "file upload",
+          "required": false
+        }],
       },
       "delete": {
         "description": "Deleting a foo",
