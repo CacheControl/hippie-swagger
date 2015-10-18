@@ -25,6 +25,9 @@ app.get('/foos/:fooId', function(req, res) {
 app.delete('/foos/:fooId', function(req, res) {
   res.status(204).end();
 });
+app.post('/foos/:fooId', function(req, res) {
+  res.status(201).end();
+});
 
 app.post('/foos', function(req, res) {
   res.send(req.body);

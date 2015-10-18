@@ -1,13 +1,46 @@
 'use strict';
 
 describe('extra parameters', function() {
-  it('errors on parameters not mentioned in the swagger spec', function() {
+  it('errors on path parameters not mentioned in the swagger spec', function() {
     expect(function() {
       hippie(app, swaggerSchema)
       .get('/foos')
-      .pathParams({ asdf: 50 })
+      .pathParams({ unmentionedParam: 50 })
       .end();
-    }).to.throw(/Parameter not mentioned in swagger spec: "asdf"/);
+    }).to.throw(/path parameter not mentioned in swagger spec: "unmentionedParam"/);
+  });
+
+  describe('formData', function() {
+    it('errors on formData parameters not mentioned in the swagger spec', function() {
+      expect(function() {
+        hippie(app, swaggerSchema)
+        .get('/foos')
+        .form()
+        .send({unmentionedParam1: 'nothing', unmentionedParam2: 'nothing'})
+        .end();
+      }).to.throw(/formData parameter not mentioned in swagger spec: "unmentionedParam1"/);
+    });
+
+    it('errors on formData file parameters not mentioned in the swagger spec', function() {
+      var file = 'Content-Disposition: form-data; name="uploadedFile"';
+
+      expect(function() {
+        hippie(app, swaggerSchema)
+        .header('Content-Type','multipart/form-data')
+        .send(file)
+        .get('/foos')
+        .end();
+      }).to.throw(/formData \(expected type "file"\) parameter not mentioned in swagger spec: ""Content-Disposition/);
+    });
+  })
+
+  it('errors on body parameters not mentioned in the swagger spec', function() {
+    expect(function() {
+      hippie(app, swaggerSchema)
+      .get('/foos')
+      .send({unmentionedParam1: 'nothing'})
+      .end();
+    }).to.throw(/Request "body" present, but Swagger spec has no body parameter mentioned/);
   });
 
   describe('header parameters', function() {
@@ -26,7 +59,7 @@ describe('extra parameters', function() {
         .header("X-New-Header", 1)
         .get('/foos')
         .end();
-      }).to.throw(/Parameter not mentioned in swagger spec:/)
+      }).to.throw(/header parameter not mentioned in swagger spec:/)
     });
   });
 

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('url parameters', function() {
+describe('parameters', function() {
   it('ignores optional parameters that are missing', function(done) {
     hippie(app, swaggerSchema)
     .get('/foos')
@@ -33,8 +33,7 @@ describe('url parameters', function() {
 
   describe('header variables', function() {
     it('errors if the header is required', function() {
-      var objectAssign = require('object-assign'),
-          headerSchema = objectAssign({}, swaggerSchema);
+      var headerSchema = cloneSwagger(swaggerSchema);
 
       //set X-Total-Count to be required for this test
       headerSchema["paths"]["/foos"]["get"]["parameters"].filter(function(param) {
@@ -58,6 +57,90 @@ describe('url parameters', function() {
         expect(res.request.headers["X-Total-Count"]).to.equal(1);
         done();
       });
+    });
+  });
+
+  describe('forms', function() {
+    describe('form-data', function() {
+      it('works if formData is set to type "file"', function(done) {
+        var file = 'Content-Disposition: form-data; name="uploadedFile"';
+
+        hippie(app, swaggerSchema)
+        .header('Content-Type','multipart/form-data')
+        .send(file)
+        .post('/foos/{fooId}')
+        .pathParams({ fooId:data.firstFoo.id })
+        .end(done);
+      });
+
+      describe('required file', function() {
+        var formSchema;
+        before(function() {
+          formSchema = cloneSwagger(swaggerSchema)
+          //set parameter to be required for this test
+          formSchema["paths"]["/foos/{fooId}"]["post"]["parameters"].filter(function(param) {
+            return param.name == 'uploadedFile';
+          })[0]["required"] = true;
+        });
+
+        it('errors if file is required & missing header and body', function() {
+          expect(function() {
+            hippie(app, formSchema)
+            .post('/foos/{fooId}')
+            .pathParams({ fooId:data.firstFoo.id })
+            .end()
+          }).to.throw(/Missing required parameter in formData: uploadedFile/)
+        })
+
+        it('errors if file is required & missing body', function() {
+          expect(function() {
+            hippie(app, formSchema)
+            .header('Content-Type','multipart/form-data')
+            .post('/foos/{fooId}')
+            .pathParams({ fooId:data.firstFoo.id })
+            .end()
+          }).to.throw(/Missing required parameter in formData: uploadedFile/)
+        })
+      })
+    })
+
+    describe('urlencoded', function() {
+      it('works if formData is optional & not provided', function(done) {
+        hippie(app, swaggerSchema)
+        .form()
+        .get('/foos')
+        .end(done);
+      });
+
+      it('works if formData is required & present', function(done) {
+        //set formMetadata to be required for this test
+        var formSchema = cloneSwagger(swaggerSchema);
+        formSchema["paths"]["/foos"]["get"]["parameters"].filter(function(param) {
+          return param.name == 'formMetadata';
+        })[0]["required"] = true;
+
+        hippie(app, formSchema)
+        .form()
+        .send({ formMetadata: 'formMetadataValue' })
+        .get('/foos')
+        .end(done);
+      });
+
+      it('errors if formData is required & missing', function() {
+        var formSchema = cloneSwagger(swaggerSchema)
+
+        //set parameter to be required for this test
+        formSchema["paths"]["/foos"]["get"]["parameters"].filter(function(param) {
+          return param.name == 'formMetadata';
+        })[0]["required"] = true;
+
+        expect(function() {
+          hippie(app, formSchema)
+          .form()
+          .get('/foos')
+          .end();
+        }).to.throw(/Missing required parameter in formData: formMetadata/)
+      })
     });
   });
 

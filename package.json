@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "ajv": "^1.0.0",
-    "object-assign": "^3.0.0"
+    "object-assign": "^3.0.0",
+    "qs": "^5.2.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
