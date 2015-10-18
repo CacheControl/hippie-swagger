@@ -159,6 +159,30 @@ hippie(app, swagger)
 //    Invalid format for parameter {body}, received: {"bogus":"post-body"}
 ```
 
+### Form Url-Encoded Parameters
+```js
+hippie(app, swagger)
+.form()
+.post('/users')
+.send({})
+.end(fn);
+
+// "username" is {required: true, in: formData} in swagger; throws:
+//    Missing required parameter in formData: username
+```
+
+### Multipart Forms
+```js
+hippie(app, swagger)
+.header('Content-Type','multipart/form-data')
+.send()
+.post('/users/upload')
+.end(fn);
+
+// "fileUpload" is {required: true, in: formData, type: file} in swagger; throws:
+//    Missing required parameter in formData: fileUpload
+```
+
 ## Troubleshooting
 
 The most common mistake is forgetting to dereference the swagger file:
