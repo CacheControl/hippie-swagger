@@ -7,7 +7,7 @@ describe('extra parameters', function() {
       .get('/foos')
       .pathParams({ unmentionedParam: 50 })
       .end();
-    }).to.throw(/Parameter not mentioned in swagger spec: "unmentionedParam"/);
+    }).to.throw(/path parameter not mentioned in swagger spec: "unmentionedParam"/);
   });
 
   describe('formData', function() {
@@ -18,7 +18,7 @@ describe('extra parameters', function() {
         .form()
         .send({unmentionedParam1: 'nothing', unmentionedParam2: 'nothing'})
         .end();
-      }).to.throw(/Parameter not mentioned in swagger spec: "unmentionedParam1"/);
+      }).to.throw(/formData parameter not mentioned in swagger spec: "unmentionedParam1"/);
     });
 
     it('errors on formData file parameters not mentioned in the swagger spec', function() {
@@ -30,7 +30,7 @@ describe('extra parameters', function() {
         .send(file)
         .get('/foos')
         .end();
-      }).to.throw(/Parameter not mentioned in swagger spec: ""Content-Disposition/);
+      }).to.throw(/formData \(expected type "file"\) parameter not mentioned in swagger spec: ""Content-Disposition/);
     });
   })
 
@@ -59,7 +59,7 @@ describe('extra parameters', function() {
         .header("X-New-Header", 1)
         .get('/foos')
         .end();
-      }).to.throw(/Parameter not mentioned in swagger spec:/)
+      }).to.throw(/header parameter not mentioned in swagger spec:/)
     });
   });
 
