@@ -14,7 +14,7 @@ var expect = require('chai').expect
 var path = require('path')
 var dereferencedSwagger
 
-describe('my test suite', function () {
+describe('Example of', function () {
   before(function (done) {
     // if using mocha, dereferencing can be performed prior during initialization via the delay flag:
     // https://mochajs.org/#delayed-root-suite
@@ -41,7 +41,7 @@ describe('my test suite', function () {
     })
   })
 
-  describe('examples of things hippie-swagger will punish you for', function () {
+  describe('things hippie-swagger will punish you for:', function () {
     it('validates paths', function (done) {
       try {
         hippie(app, dereferencedSwagger)
@@ -57,10 +57,10 @@ describe('my test suite', function () {
       try {
         hippie(app, dereferencedSwagger)
           .get('/tags/{tagId}')
-          .qs({ undefinedParameter: 'not-in-swagger' })
+          .qs({ username: 'not-in-swagger' })
           .end()
       } catch (ex) {
-        expect(ex.message).to.equal('Parameter not mentioned in swagger spec: "undefinedParameter", available params: tagId')
+        expect(ex.message).to.equal('query parameter not mentioned in swagger spec: \"username\", available params: tagId')
         done()
       }
     })
