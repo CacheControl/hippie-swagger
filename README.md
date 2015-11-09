@@ -6,14 +6,15 @@ _"The confident hippie"_
 
 ## Synopsis
 
-[Hippie](https://github.com/vesln/hippie) wrapper that provides end-to-end API testing with built-in [swagger](http://swagger.io) validation
+```hippie-swagger``` is a tool for testing RESTful APIs with built-in swagger assertions.  Write your typical API tests, with the added bonus that any request(or response!) details *not* matching the application's swagger file will throw an exception, failing the spec.  ```hippie-swagger``` uses [hippie](https://github.com/vesln/hippie) under the hood, an excellent API testing tool.
 
 ## Features
 
 * All [hippie](https://github.com/vesln/hippie) features included via peer-dependency
-* Ensures application is in sync with swagger definition
-* Parameters and responses validated against swagger format
-* Support for path, query string, header, and body variables
+* All aspects of swagger file validated; parameters, request/response body, paths, etc.
+* Checks for parameters, paths, headers, etc missing from swagger file
+* Ensures swagger file accurately reflects API behavior
+* Accurate, human readable assertion messages
 
 ## Installation
 
@@ -25,7 +26,7 @@ npm install hippie-swagger --save-dev
 
 ```js
 var hippie = require('hippie-swagger'),
-    swagger = require('your-swagger-file');
+    swagger = require('dereferenced-swagger-file');
 
 hippie(app, swagger)
 .get('/users/{username}')
@@ -42,9 +43,10 @@ hippie(app, swagger)
 
 ## Usage
 * When specifying a url(.get, .post, .patch, .url, etc), use the [swagger path](http://swagger.io/specification/#pathsObject)
-* If the url contains a variable, hippie-swagger will prompt you define them using [pathParams](#pathparams)
-* Hippie's .json() method is called automatically on every request
-* These aside, use hippie as you normally would.
+* Provide any path variables using [pathParams](#pathparams)
+* Hippie's .json() method is called automatically and no longer needs to be provided
+
+These caveats aside, use hippie as you normally would.
 
 ### #pathParams
 Replaces variables contained in the swagger path.
@@ -86,7 +88,7 @@ See the [example](example/index.js) folder
 
 ## Validations
 
-When hippie-swagger detects it is interacting with the app in ways not specified in the swagger file, it will throw an error and fail the test.  The idea is to use hippie's core features to write API tests as per usual, and hippie-swagger will only interject if the swagger definition is violated.
+When hippie-swagger detects it is interacting with the app in ways not specified in the swagger file, it will throw an error and fail the test.  The idea is to use hippie's core features to write API tests as per usual, and hippie-swagger will only interject if the swagger contract is violated.
 
 Below are list of some of the validations that hippie-swagger checks for:
 
@@ -193,4 +195,4 @@ The most common mistake is forgetting to dereference the swagger file:
 "'Error: cant resolve reference ...'
 ```
 
-Dereferencing can be accomplished using [swagger-parser](https://github.com/BigstickCarpet/swagger-parser/blob/master/docs/swagger-parser.md#dereferenceapi-options-callback).  Also, see the [example](example/index.js).
+Dereferencing can be accomplished using [swagger-parser](https://github.com/BigstickCarpet/swagger-parser/blob/master/docs/swagger-parser.md#dereferenceapi-options-callback).  The [example](example/index.js) gives a demonstration.
