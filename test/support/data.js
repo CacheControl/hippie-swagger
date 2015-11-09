@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var data = {
   firstFoo: {
@@ -11,10 +11,10 @@ var data = {
     description: 'second foo',
     orderNumber: 2
   }
-};
+}
 data.foos = [
   data.firstFoo,
   data.secondFoo
-];
+]
 
-module.exports = data;
+module.exports = data

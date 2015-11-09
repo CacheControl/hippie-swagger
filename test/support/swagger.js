@@ -1,217 +1,215 @@
-'use strict';
-
-var swaggerParser = require('swagger-parser');
+'use strict'
 
 module.exports = {
-  "swagger": "2.0",
-  "info": {
-    "version": "1.0.0",
-    "title": "Test App"
+  'swagger': '2.0',
+  'info': {
+    'version': '1.0.0',
+    'title': 'Test App'
   },
-  "paths": {
-    "/foos": {
-      "get": {
-        "description": "List all foos",
-        "parameters": [{
-          "name": "limit",
-          "in": "query",
-          "description": "resultset limiter for pagination",
-          "required": false,
-          "type": "number",
+  'paths': {
+    '/foos': {
+      'get': {
+        'description': 'List all foos',
+        'parameters': [{
+          'name': 'limit',
+          'in': 'query',
+          'description': 'resultset limiter for pagination',
+          'required': false,
+          'type': 'number'
         }, {
-          "name": "offset",
-          "in": "query",
-          "description": "resultset offset for pagination",
-          "required": false,
-          "type": "number",
+          'name': 'offset',
+          'in': 'query',
+          'description': 'resultset offset for pagination',
+          'required': false,
+          'type': 'number'
         }, {
-          "name": "X-Total-Count",
-          "in": "header",
-          "description": "header example",
-          "required": false,
-          "type": "number",
-        },{
-          "name": "formMetadata",
-          "in": "formData",
-          "description": "Additional data to pass to server",
-          "required": false,
-          "type": "string",
+          'name': 'X-Total-Count',
+          'in': 'header',
+          'description': 'header example',
+          'required': false,
+          'type': 'number'
+        }, {
+          'name': 'formMetadata',
+          'in': 'formData',
+          'description': 'Additional data to pass to server',
+          'required': false,
+          'type': 'string'
         }],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/foo"
+        'responses': {
+          '200': {
+            'description': 'Successful response',
+            'schema': {
+              'type': 'array',
+              'items': {
+                '$ref': '#/definitions/foo'
               }
             }
-          },
+          }
         }
       },
-      "post": {
-        "description": "Create a foo",
-        "parameters": [{
-          "in": "body",
-          //Swagger spec: "The name of the body parameter has no effect on the parameter itself"
-          "name": "name-irrelevant",
-          "description": "foo object to be added",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/foo"
+      'post': {
+        'description': 'Create a foo',
+        'parameters': [{
+          'in': 'body',
+          // Swagger spec: "The name of the body parameter has no effect on the parameter itself"
+          'name': 'name-irrelevant',
+          'description': 'foo object to be added',
+          'required': true,
+          'schema': {
+            '$ref': '#/definitions/foo'
           }
         }],
-        "responses": {
-          "201": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/foo"
+        'responses': {
+          '201': {
+            'description': 'Successful response',
+            'schema': {
+              '$ref': '#/definitions/foo'
             }
           }
         }
       }
     },
-    "/invalid-foos": {
-      "get": {
-        "description": "Server returns data that does not validate",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/foo"
+    '/invalid-foos': {
+      'get': {
+        'description': 'Server returns data that does not validate',
+        'responses': {
+          '200': {
+            'description': 'Successful response',
+            'schema': {
+              'type': 'array',
+              'items': {
+                '$ref': '#/definitions/foo'
               }
             }
           }
         }
       },
-      "post": {
-        "description": "Server returns data that does not validate",
-        "responses": {
-          "200": {
-            "description": "Server returns data that does not validate",
-            "schema": {
-              "$ref": "#/definitions/foo"
+      'post': {
+        'description': 'Server returns data that does not validate',
+        'responses': {
+          '200': {
+            'description': 'Server returns data that does not validate',
+            'schema': {
+              '$ref': '#/definitions/foo'
             }
-          },
+          }
         },
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "description": "foo object to be added",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/foo"
+        'parameters': [{
+          'in': 'body',
+          'name': 'body',
+          'description': 'foo object to be added',
+          'required': true,
+          'schema': {
+            '$ref': '#/definitions/foo'
           }
-        }],
+        }]
       },
-      "delete": {
-        "description": "Server returns data that does not validate",
-        "responses": {
-          "200": {
-            "description": "Deleted. No content",
+      'delete': {
+        'description': 'Server returns data that does not validate',
+        'responses': {
+          '200': {
+            'description': 'Deleted. No content'
           }
         }
       },
-      "put": {
-        "description": "Server returns data that does not validate",
-        "responses": {
-          "204": {
-            "description": "Updated.  No content.",
+      'put': {
+        'description': 'Server returns data that does not validate',
+        'responses': {
+          '204': {
+            'description': 'Updated.  No content.'
           }
         }
       }
     },
-    "/foos/{fooId}": {
-      "get": {
-        "description": "Retrieving a foo",
-        "parameters": [{
-          "name": "fooId",
-          "in": "path",
-          "description": "foo identifier",
-          "required": true,
-          "type": "string",
-          "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
+    '/foos/{fooId}': {
+      'get': {
+        'description': 'Retrieving a foo',
+        'parameters': [{
+          'name': 'fooId',
+          'in': 'path',
+          'description': 'foo identifier',
+          'required': true,
+          'type': 'string',
+          'pattern': '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$'
         }],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/foo"
+        'responses': {
+          '200': {
+            'description': 'Successful response',
+            'schema': {
+              '$ref': '#/definitions/foo'
             }
           }
         }
       },
-      "post": {
-        "description": "Upload file example",
+      'post': {
+        'description': 'Upload file example',
         consumes: [
-          "multipart/form-data"
+          'multipart/form-data'
         ],
-        "responses": {
-          "201": {
-            "description": "noop"
-          },
+        'responses': {
+          '201': {
+            'description': 'noop'
+          }
         },
-        "parameters": [{
-          "name": "fooId",
-          "in": "path",
-          "description": "foo identifier",
-          "required": true,
-          "type": "string",
-          "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
-        },{
-          "in": "formData",
-          "name": "uploadedFile",
-          "type": "file",
-          "description": "file upload",
-          "required": false
-        }],
+        'parameters': [{
+          'name': 'fooId',
+          'in': 'path',
+          'description': 'foo identifier',
+          'required': true,
+          'type': 'string',
+          'pattern': '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$'
+        }, {
+          'in': 'formData',
+          'name': 'uploadedFile',
+          'type': 'file',
+          'description': 'file upload',
+          'required': false
+        }]
       },
-      "delete": {
-        "description": "Deleting a foo",
-        "parameters": [{
-          "name": "fooId",
-          "in": "path",
-          "description": "foo identifier",
-          "required": true,
-          "type": "string",
-          "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
+      'delete': {
+        'description': 'Deleting a foo',
+        'parameters': [{
+          'name': 'fooId',
+          'in': 'path',
+          'description': 'foo identifier',
+          'required': true,
+          'type': 'string',
+          'pattern': '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$'
         }],
-        "responses": {
-          "204": {
-            "description": "Deleted. No content",
+        'responses': {
+          '204': {
+            'description': 'Deleted. No content'
           }
         }
       }
     }
   },
-  "definitions": {
-    "foo": {
-      "title": "Foo object definition",
-      "description": "Schema for a foo object.",
-      "type": "object",
-      "required": ["id", "description", "orderNumber"],
-      "properties": {
-        "id": {
-          "description": "primary identifier",
-          "$ref": "#/definitions/uuid"
+  'definitions': {
+    'foo': {
+      'title': 'Foo object definition',
+      'description': 'Schema for a foo object.',
+      'type': 'object',
+      'required': ['id', 'description', 'orderNumber'],
+      'properties': {
+        'id': {
+          'description': 'primary identifier',
+          '$ref': '#/definitions/uuid'
         },
-        "description": {
-          "description": "an explanation of the foo",
-          "type": "string",
+        'description': {
+          'description': 'an explanation of the foo',
+          'type': 'string'
         },
-        "orderNumber": {
-          "description": "the order index of the foo",
-          "type": "integer",
+        'orderNumber': {
+          'description': 'the order index of the foo',
+          'type': 'integer'
         }
       }
     },
-    "uuid": {
-      "title": "UUID",
-      "description": "Schema defining structure of a string representation of a uuid.",
-      "type": "string",
-      "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
+    'uuid': {
+      'title': 'UUID',
+      'description': 'Schema defining structure of a string representation of a uuid.',
+      'type': 'string',
+      'pattern': '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$'
     }
   }
-};
+}

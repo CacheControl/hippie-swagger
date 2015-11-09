@@ -4,7 +4,7 @@
   "description": "Hippie wrapper that provides end to end API testing with swagger validation",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "standard && mocha"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,20 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CacheControl/hippie-swagger/issues"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "before",
+      "expect",
+      "data",
+      "cloneSwagger",
+      "app",
+      "hippie",
+      "swaggerSchema",
+      "run"
+    ]
   },
   "homepage": "https://github.com/CacheControl/hippie-swagger#readme",
   "peerDependencies": {
@@ -33,6 +47,7 @@
     "express": "^4.13.3",
     "hippie": "^0.3.0",
     "mocha": "^2.2.5",
+    "standard": "^5.3.1",
     "swagger-parser": "^3.3.0"
   }
 }

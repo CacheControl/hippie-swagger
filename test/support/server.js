@@ -2,55 +2,52 @@
  * External dependencies.
  */
 
-var express = require('express');
+var express = require('express')
 
 /**
  * Server.
  */
 
-var app = express();
-
+var app = express()
 
 /*
  * endpoints w/valid responses
  */
+/* /foos/:id */
+app.get('/foos/:fooId', function (req, res) {
+  res.send(data.firstFoo)
+})
+app.delete('/foos/:fooId', function (req, res) {
+  res.status(204).end()
+})
+app.post('/foos/:fooId', function (req, res) {
+  res.status(201).end()
+})
 
-app.all('/foos', function(req, res) {
-  res.send(data.foos);
-});
-
-app.get('/foos/:fooId', function(req, res) {
-  res.send(data.firstFoo);
-});
-app.delete('/foos/:fooId', function(req, res) {
-  res.status(204).end();
-});
-app.post('/foos/:fooId', function(req, res) {
-  res.status(201).end();
-});
-
-app.post('/foos', function(req, res) {
-  res.send(req.body);
-});
-
+/* /foos */
+app.post('/foos', function (req, res) {
+  res.status(201)
+  res.send(req.body)
+})
+app.get('/foos', function (req, res) {
+  res.send(data.foos)
+})
 
 /*
  * endpoints with invalid response
  */
-app.all('/invalid-foos', function(req, res) {
-  res.send([{'invalid-foo': true}]);
-});
-
-
+app.all('/invalid-foos', function (req, res) {
+  res.send([{'invalid-foo': true}])
+})
 
 /**
  * Primary export.
  */
 
-module.exports = app;
+module.exports = app
 
 /**
  * Export the configured port.
  */
 
-module.exports.PORT = process.env.HIPPIE_PORT || 7891;
+module.exports.PORT = process.env.HIPPIE_PORT || 7891

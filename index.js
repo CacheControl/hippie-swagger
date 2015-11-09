@@ -1,1 +1,1 @@
-module.exports = require('./lib/hippie-swagger.js');
+module.exports = require('./lib/hippie-swagger.js')

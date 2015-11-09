@@ -2,6 +2,8 @@
 
 _"The confident hippie"_
 
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
 ## Synopsis
 
 [Hippie](https://github.com/vesln/hippie) wrapper that provides end-to-end API testing with built-in [swagger](http://swagger.io) validation
