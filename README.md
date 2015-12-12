@@ -6,14 +6,18 @@ _"The confident hippie"_
 
 ## Synopsis
 
-```hippie-swagger``` is a tool for testing RESTful APIs with built-in swagger assertions.  Write your typical API tests, with the added bonus that any request(or response!) details *not* matching the application's swagger file will throw an exception, failing the spec.  ```hippie-swagger``` uses [hippie](https://github.com/vesln/hippie) under the hood, an excellent API testing tool.
+```hippie-swagger``` is a tool for testing RESTful APIs that includes built-in swagger assertions.
+
+Write your usual API tests, and any request or response details *not* matching the swagger file will throw an exception, failing the spec.  This ensures the swagger definition accurately describes application behavior, and doesn't become out of sync.
+
+```hippie-swagger``` uses [hippie](https://github.com/vesln/hippie) under the hood, an excellent API testing tool.
 
 ## Features
 
-* All [hippie](https://github.com/vesln/hippie) features included via peer-dependency
+* All [hippie](https://github.com/vesln/hippie) features included
 * All aspects of swagger file validated; parameters, request/response body, paths, etc.
-* Checks for parameters, paths, headers, etc missing from swagger file
-* Ensures swagger file accurately reflects API behavior
+* Checks for extra parameters, paths, headers, etc not mentined in the swagger file
+* Ensures swagger file accurately describes API behavior
 * Accurate, human readable assertion messages
 
 ## Installation
@@ -42,11 +46,11 @@ hippie(app, swagger)
 ```
 
 ## Usage
+* See [hippie](https://github.com/vesln/hippie) documentation for a description of the base api
 * When specifying a url(.get, .post, .patch, .url, etc), use the [swagger path](http://swagger.io/specification/#pathsObject)
 * Provide any path variables using [pathParams](#pathparams)
-* Hippie's .json() method is called automatically and no longer needs to be provided
 
-These caveats aside, use hippie as you normally would.
+These aside, use hippie as you normally would; see the [example](example/index.js).
 
 ### #pathParams
 Replaces variables contained in the swagger path.
