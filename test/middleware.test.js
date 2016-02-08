@@ -43,4 +43,22 @@ describe('middleware', function () {
         .to.throw(/Swagger spec does not define method: "put"/)
     })
   })
+
+  describe('basePath support', function () {
+    it('basePath is set', function () {
+      swaggerSchema.basePath = '/base'
+      ctx._url = '/base/foos'
+      middleware.call(ctx, swaggerSchema, options, function (opts) {
+        expect(opts).to.eql(options)
+      })
+    })
+
+    it('basePath is set but equal to /', function () {
+      swaggerSchema.basePath = '/'
+      ctx._url = '/foos'
+      middleware.call(ctx, swaggerSchema, options, function (opts) {
+        expect(opts).to.eql(options)
+      })
+    })
+  })
 })
