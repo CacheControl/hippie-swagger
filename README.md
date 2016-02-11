@@ -8,9 +8,9 @@ _"The confident hippie"_
 
 ## Synopsis
 
-```hippie-swagger``` is a tool for testing RESTful APIs that includes built-in swagger assertions.
+```hippie-swagger``` is a tool for testing RESTful APIs.  In addition to validating api behavior, it will fail tests when swagger documentation is missing or inaccurate.
 
-Write your usual API tests, and any request or response details *not* matching the swagger file will throw an exception, failing the spec.  This ensures the swagger definition accurately describes application behavior, and doesn't become out of sync.
+As the test suite runs, any request or response details *not* matching the swagger file will throw the appropriate exception, failing the spec.  This ensures the swagger definition accurately describes application behavior, keeping documentation in sync with reality.
 
 ```hippie-swagger``` uses [hippie](https://github.com/vesln/hippie) under the hood, an excellent API testing tool.
 
@@ -18,7 +18,7 @@ Write your usual API tests, and any request or response details *not* matching t
 
 * All [hippie](https://github.com/vesln/hippie) features included
 * All aspects of swagger file validated; parameters, request/response body, paths, etc.
-* Checks for extra parameters, paths, headers, etc not mentined in the swagger file
+* Checks for extra parameters, paths, headers, etc not mentioned in the swagger file
 * Ensures swagger file accurately describes API behavior
 * Accurate, human readable assertion messages
 
@@ -69,7 +69,8 @@ hippie(app, swagger)
 
 ## Options
 
-To customize behavior, an ```options``` hash may be passed as a third argument:
+To customize behavior, an ```options``` hash may be passed as a third argument.  Typically, ```options``` only need to be specified in situations where the test covers responses to improper requests (e.g. validating the application returns a 422 when a required parameter is not provided).
+
 ```js
 var options = {
   validateResponseSchema: true,
