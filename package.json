@@ -22,6 +22,7 @@
   },
   "standard": {
     "globals": [
+      "beforeEach",
       "describe",
       "it",
       "before",
@@ -50,6 +51,7 @@
     "express": "^4.13.3",
     "hippie": "0.5.0",
     "mocha": "^2.2.5",
+    "nock": "~7.2.2",
     "standard": "^5.3.1",
     "swagger-parser": "^3.3.0"
   }
