@@ -26,6 +26,14 @@ describe('middleware', function () {
     })
   })
 
+  it('url decodes the path', function () {
+    var pathCtx = hippieStub({url: '/foos/%7BfooId%7D'})
+    pathCtx.swaggerParams = { path: { fooId: '6e9b25c2-7c22-44c5-8890-15613aa1fb6a' } }
+    middleware.call(pathCtx, swaggerSchema, { method: 'GET', url: '/foos/{fooId}' }, function (opts) {
+      expect(opts).to.exist
+    })
+  })
+
   describe('throws an error', function () {
     it('when the path is not defined in the swagger schema', function () {
       var pathCtx = hippieStub({url: 'pathNotMentionedInSwagger'})
