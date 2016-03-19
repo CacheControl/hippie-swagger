@@ -41,11 +41,10 @@ describe('parameters', function () {
         return param.name === 'X-Total-Count'
       })[0]['required'] = true
 
-      expect(function () {
-        hippie(app, headerSchema)
-          .get('/foos')
-          .end()
-      }).to.throw(/Missing required parameter in header: X-Total-Count/)
+      expect(hippie(app, headerSchema)
+        .get('/foos')
+        .end()
+      ).to.be.rejectedWith(/Missing required parameter in header: X-Total-Count/)
     })
 
     it('replaces header variables', function (done) {
@@ -85,22 +84,20 @@ describe('parameters', function () {
         })
 
         it('errors if file is required & missing header and body', function () {
-          expect(function () {
-            hippie(app, formSchema)
-              .post('/foos/{fooId}')
-              .pathParams({ fooId: data.firstFoo.id })
-              .end()
-          }).to.throw(/Missing required parameter in formData: uploadedFile/)
+          expect(hippie(app, formSchema)
+            .post('/foos/{fooId}')
+            .pathParams({ fooId: data.firstFoo.id })
+            .end()
+          ).to.be.rejectedWith(/Missing required parameter in formData: uploadedFile/)
         })
 
         it('errors if file is required & missing body', function () {
-          expect(function () {
-            hippie(app, formSchema)
-              .header('Content-Type', 'multipart/form-data')
-              .post('/foos/{fooId}')
-              .pathParams({ fooId: data.firstFoo.id })
-              .end()
-          }).to.throw(/Missing required parameter in formData: uploadedFile/)
+          expect(hippie(app, formSchema)
+            .header('Content-Type', 'multipart/form-data')
+            .post('/foos/{fooId}')
+            .pathParams({ fooId: data.firstFoo.id })
+            .end()
+          ).to.be.rejectedWith(/Missing required parameter in formData: uploadedFile/)
         })
       })
     })
@@ -135,43 +132,39 @@ describe('parameters', function () {
           return param.name === 'formMetadata'
         })[0]['required'] = true
 
-        expect(function () {
-          hippie(app, formSchema)
-            .form()
-            .get('/foos')
-            .end()
-        }).to.throw(/Missing required parameter in formData: formMetadata/)
+        expect(hippie(app, formSchema)
+          .form()
+          .get('/foos')
+          .end()
+        ).to.be.rejectedWith(/Missing required parameter in formData: formMetadata/)
       })
     })
   })
 
   describe('errors', function () {
     it('when a required parameter is missing', function () {
-      expect(function () {
-        hippie(app, swaggerSchema)
-          .get('/foos/{fooId}')
-          .end()
-      }).to.throw(/Missing required parameter in path: fooId/)
+      expect(hippie(app, swaggerSchema)
+        .get('/foos/{fooId}')
+        .end()
+      ).to.be.rejectedWith(/Missing required parameter in path: fooId/)
     })
 
     it('when a parameter fails json-schema validation', function () {
-      expect(function () {
-        hippie(app, swaggerSchema)
-          .get('/foos/{fooId}')
-          .pathParams({ fooId: 45 })
-          .end()
-      }).to.throw(/Invalid format for parameter {fooId}/)
+      expect(hippie(app, swaggerSchema)
+        .get('/foos/{fooId}')
+        .pathParams({ fooId: 45 })
+        .end()
+      ).to.be.rejectedWith(/Invalid format for parameter {fooId}/)
     })
   })
 
   describe('settings', function () {
     it('when validateParameterSchema is off, it does not error if parameter fails json-schema validation', function () {
-      expect(function () {
-        hippie(app, swaggerSchema, { validateParameterSchema: false })
-          .get('/foos/{fooId}')
-          .pathParams({ fooId: 45 })
-          .end()
-      }).to.not.throw()
+      expect(hippie(app, swaggerSchema, { validateParameterSchema: false })
+        .get('/foos/{fooId}')
+        .pathParams({ fooId: 45 })
+        .end()
+      ).to.be.rejected
     })
   })
 })

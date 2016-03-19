@@ -15,16 +15,14 @@ describe('POST requests', function () {
       })
   })
 
-  it('errors when the post body is invalid', function (done) {
-    expect(function () {
-      hippie(app, swaggerSchema)
-        .post('/foos')
-        .send({
-          bogus: 'post-body'
-        })
-        .end()
-    }).to.throw(/Invalid format for parameter/)
-    done()
+  it('errors when the post body is invalid', function () {
+    expect(hippie(app, swaggerSchema)
+      .post('/foos')
+      .send({
+        bogus: 'post-body'
+      })
+      .end()
+    ).to.be.rejectedWith(/Invalid format for parameter/)
   })
 
   it('errors when the post response is invalid', function (done) {

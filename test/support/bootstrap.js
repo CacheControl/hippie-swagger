@@ -2,8 +2,12 @@
 
 var swaggerParser = require('swagger-parser')
 var swaggerSpec = require('./swagger.js')
+var chai = require('chai')
+var chaiAsPromised = require('chai-as-promised')
 
-global.expect = require('chai').expect
+chai.use(chaiAsPromised)
+
+global.expect = chai.expect
 global.data = require('./data')
 global.app = require('./server')
 global.hippie = require('../../index')
