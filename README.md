@@ -10,7 +10,7 @@ _"The confident hippie"_
 
 ```hippie-swagger``` is a tool for testing RESTful APIs.  In addition to validating api behavior, it will fail tests when swagger documentation is missing or inaccurate.
 
-As the test suite runs, any request or response details *not* matching the swagger file will throw the appropriate exception, failing the spec.  This ensures the swagger definition accurately describes application behavior, keeping documentation in sync with reality.
+As the test suite runs, any request or response details *not* matching the swagger file will throw an appropriate exception, failing the spec.  This ensures the swagger definition accurately describes application behavior, keeping documentation in sync with reality.
 
 ```hippie-swagger``` uses [hippie](https://github.com/vesln/hippie) under the hood, an excellent API testing tool.
 
@@ -54,7 +54,30 @@ hippie(app, swagger)
 
 These aside, use hippie as you normally would; see the [example](example/index.js).
 
-### #pathParams
+## Methods
+
+### #constructor (Object app, Object swagger, Object [options])
+
+Test an HTTP app (like express) directly
+
+```js
+hippie(app, swagger, options)
+.get('/projects')
+.end(fn);
+```
+
+### #constructor (Object swagger, Object [options])
+
+Test a remote HTTP app using a fully qualified url
+
+```js
+hippie(swagger, options)
+.get('http://localhost:3000/projects')
+.end(fn);
+```
+
+### #pathParams(Object hash)
+
 Replaces variables contained in the swagger path.
 
 ```js
@@ -69,7 +92,7 @@ hippie(app, swagger)
 
 ## Options
 
-To customize behavior, an ```options``` hash may be passed as a third argument.  Typically, ```options``` only need to be specified in situations where the test covers responses to improper requests (e.g. validating the application returns a 422 when a required parameter is not provided).
+To customize behavior, an ```options``` hash may be passed to the constructor.  Typically, ```options``` only need to be specified in situations where the test covers responses to improper requests (e.g. validating the application returns a 422 when a required parameter is not provided).
 
 ```js
 var options = {

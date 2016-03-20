@@ -1,10 +1,11 @@
 {
   "name": "hippie-swagger",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Hippie wrapper that provides end to end API testing with swagger validation",
   "main": "index.js",
   "scripts": {
-    "test": "standard && mocha"
+    "test": "mocha && npm run lint",
+    "lint": "standard || true"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   },
   "standard": {
     "globals": [
+      "beforeEach",
       "describe",
       "it",
       "before",
@@ -45,9 +47,11 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
+    "chai-as-promised": "~5.2.0",
     "express": "^4.13.3",
-    "hippie": "^0.3.0",
+    "hippie": "0.5.0",
     "mocha": "^2.2.5",
+    "nock": "~7.2.2",
     "standard": "^5.3.1",
     "swagger-parser": "^3.3.0"
   }

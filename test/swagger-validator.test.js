@@ -26,7 +26,7 @@ describe('swagger-validator', function () {
       Object.keys(schema).forEach(function (key) {
         var invalidSchema = objectAssign({}, schema)
         delete invalidSchema[key]
-        var regex = new RegExp('Swagger schema missing required property: "' + key + '"', 'g')
+        var regex = new RegExp('Swagger schema invalid', 'g')
 
         expect(function () {
           hippie(app, invalidSchema)
