@@ -156,12 +156,10 @@ hippie(app, swagger)
 ```js
 hippie(app, swagger)
 .get('/users')
-.pathParams({
-  extraParam: 'will-throw',
-})
+.qs({ page: 2, limit: 30 })
 .end(fn);
-// "extraParam" not mentioned swagger file; throws:
-//    Parameter not mentioned in swagger spec: "extraParam"
+// "page" missing from swagger file; throws:
+//    Error: query parameter not mentioned in swagger spec: "page", available params: limit
 ```
 
 ### Response format
