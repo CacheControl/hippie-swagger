@@ -40,7 +40,7 @@
     "hippie": "*"
   },
   "dependencies": {
-    "ajv": "^1.0.0",
+    "ajv": "^4.1.0",
     "object-assign": "^3.0.0",
     "qs": "^5.2.0",
     "string.prototype.startswith": "^0.2.0"
