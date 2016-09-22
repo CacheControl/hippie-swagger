@@ -61,6 +61,18 @@ describe('middleware', function () {
       })
     })
 
+    it('basePath is set and subpath is /', function () {
+      var originalSwaggerSchema = swaggerSchema.basePath
+      var basePathOptions = {method: 'GET', url: '/'}
+      swaggerSchema.basePath = '/base'
+      ctx._url = '/base'
+
+      middleware.call(ctx, swaggerSchema, basePathOptions, function (opts) {
+        expect(opts).to.eql(basePathOptions)
+      })
+      swaggerSchema.basePath = originalSwaggerSchema
+    })
+
     it('basePath is set but equal to /', function () {
       swaggerSchema.basePath = '/'
       ctx._url = '/foos'
