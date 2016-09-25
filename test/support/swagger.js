@@ -7,6 +7,22 @@ module.exports = {
     'title': 'Test App'
   },
   'paths': {
+    '/': {
+      'get': {
+        'description': 'List foos from base path',
+        'responses': {
+          '200': {
+            'description': 'Successful response',
+            'schema': {
+              'type': 'array',
+              'items': {
+                '$ref': '#/definitions/foo'
+              }
+            }
+          }
+        }
+      }
+    },
     '/foos': {
       'get': {
         'description': 'List all foos',
