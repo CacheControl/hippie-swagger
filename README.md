@@ -224,3 +224,12 @@ The most common mistake is forgetting to dereference the swagger file:
 ```
 
 Dereferencing can be accomplished using [swagger-parser](https://github.com/BigstickCarpet/swagger-parser/blob/master/docs/swagger-parser.md#dereferenceapi-options-callback).  The [example](example/index.js) gives a demonstration.
+
+## Running the internal hippie-swagger tests
+
+To run the `hippie-swagger` tests, make sure that you have your dependencies then run the tests:
+
+```
+npm install
+./node_modules/mocha/bin/mocha ./test/
+```
