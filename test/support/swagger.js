@@ -138,12 +138,20 @@ module.exports = {
       }
     },
     '/foos/{fooId}': {
+      'parameters': [{
+        'name': 'fooId',
+        'in': 'path',
+        'description': 'foo identifier',
+        'required': true,
+        'type': 'string',
+        'pattern': '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$'
+      }],
       'get': {
         'description': 'Retrieving a foo',
         'parameters': [{
           'name': 'fooId',
           'in': 'path',
-          'description': 'foo identifier',
+          'description': 'foo identifier (duplicated)',
           'required': true,
           'type': 'string',
           'pattern': '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$'
@@ -168,13 +176,6 @@ module.exports = {
           }
         },
         'parameters': [{
-          'name': 'fooId',
-          'in': 'path',
-          'description': 'foo identifier',
-          'required': true,
-          'type': 'string',
-          'pattern': '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$'
-        }, {
           'in': 'formData',
           'name': 'uploadedFile',
           'type': 'file',
@@ -184,14 +185,7 @@ module.exports = {
       },
       'delete': {
         'description': 'Deleting a foo',
-        'parameters': [{
-          'name': 'fooId',
-          'in': 'path',
-          'description': 'foo identifier',
-          'required': true,
-          'type': 'string',
-          'pattern': '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$'
-        }],
+        'parameters': [],
         'responses': {
           '204': {
             'description': 'Deleted. No content'
