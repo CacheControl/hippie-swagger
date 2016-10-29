@@ -38,7 +38,7 @@ describe('middleware', function () {
     var pathCtx = hippieStub({url: '/foos/%7BfooId%7D'})
     pathCtx.swaggerParams = { path: { fooId: '6e9b25c2-7c22-44c5-8890-15613aa1fb6a' } }
     middleware.call(pathCtx, swaggerSchema, { method: 'DELETE', url: '/foos/{fooId}' }, function (opts) {
-     expect(opts.url).to.eql('/foos/6e9b25c2-7c22-44c5-8890-15613aa1fb6a')
+      expect(opts.url).to.eql('/foos/6e9b25c2-7c22-44c5-8890-15613aa1fb6a')
     })
   })
 

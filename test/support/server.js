@@ -20,6 +20,9 @@ app.get('/foos/:fooId', function (req, res) {
 app.delete('/foos/:fooId', function (req, res) {
   res.status(204).end()
 })
+app.patch('/foos/:fooId', function (req, res) {
+  res.status(200).end()
+})
 app.post('/foos/:fooId', function (req, res) {
   res.status(201).end()
 })

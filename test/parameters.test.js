@@ -167,4 +167,25 @@ describe('parameters', function () {
       ).to.be.rejected
     })
   })
+
+  describe('methods parameters override path parameters', function () {
+    it('rejects when parameter fails json-schema validation', function () {
+      expect(hippie(app, swaggerSchema)
+        .patch('/foos/{fooId}')
+        .pathParams({ fooId: data.firstFoo.id }) // uuid valid at path level, but overriden to integer at method level
+        .end()
+      ).to.be.rejectedWith(/Invalid format for parameter {fooId}/)
+    })
+
+    it('accepts valid method parameters', function (done) {
+      hippie(app, swaggerSchema)
+        .patch('/foos/{fooId}')
+        .pathParams({ fooId: 45 })
+        .end(function (err, res) {
+          expect(err).to.be.undefined
+          expect(res.req.path).to.equal('/foos/' + 45)
+          done()
+        })
+    })
+  })
 })

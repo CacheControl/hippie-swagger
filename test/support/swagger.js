@@ -148,13 +148,23 @@ module.exports = {
       }],
       'get': {
         'description': 'Retrieving a foo',
+        'responses': {
+          '200': {
+            'description': 'Successful response',
+            'schema': {
+              '$ref': '#/definitions/foo'
+            }
+          }
+        }
+      },
+      'patch': {
+        'description': 'Patching a foo',
         'parameters': [{
           'name': 'fooId',
           'in': 'path',
-          'description': 'foo identifier (duplicated)',
+          'description': 'foo identifier (integer override)',
           'required': true,
-          'type': 'string',
-          'pattern': '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$'
+          'type': 'integer'
         }],
         'responses': {
           '200': {
