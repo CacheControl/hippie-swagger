@@ -232,3 +232,6 @@ To run the `hippie-swagger` tests:
 ```
 npm test
 ```
+
+## License
+[ISC](./LICENSE)
