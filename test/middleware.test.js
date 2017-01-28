@@ -9,7 +9,7 @@ function hippieStub (options) {
   return new function () {
     this._url = options.url || '/foos'
     this.expect = function () {}
-  }
+  }()
 }
 var ctx = hippieStub()
 

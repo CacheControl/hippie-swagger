@@ -60,7 +60,7 @@ describe('Example of', function () {
           .qs({ username: 'not-in-swagger' })
           .end()
       } catch (ex) {
-        expect(ex.message).to.equal('query parameter not mentioned in swagger spec: \"username\", available params: tagId')
+        expect(ex.message).to.equal('query parameter not mentioned in swagger spec: "username", available params: tagId')
         done()
       }
     })
