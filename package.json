@@ -1,6 +1,6 @@
 {
   "name": "hippie-swagger",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Hippie wrapper that provides end to end API testing with swagger validation",
   "main": "index.js",
   "scripts": {
@@ -37,19 +37,19 @@
   },
   "homepage": "https://github.com/CacheControl/hippie-swagger#readme",
   "dependencies": {
-    "ajv": "^4.1.0",
-    "hippie": "^0.5.0",
-    "object-assign": "^3.0.0",
+    "ajv": "^4.11.2",
+    "hippie": "^0.5.1",
+    "object-assign": "^4.1.1",
     "qs": "^5.2.0",
     "string.prototype.startswith": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "chai-as-promised": "~5.2.0",
-    "express": "^4.13.3",
-    "mocha": "^2.2.5",
-    "nock": "~7.2.2",
-    "standard": "^5.3.1",
+    "chai-as-promised": "^6.0.0",
+    "express": "^4.14.1",
+    "mocha": "^3.2.0",
+    "nock": "^9.0.2",
+    "standard": "^8.6.0",
     "swagger-parser": "^3.3.0"
   }
 }
