@@ -4,8 +4,8 @@
   "description": "Hippie wrapper that provides end to end API testing with swagger validation",
   "main": "index.js",
   "scripts": {
-    "test": "mocha && npm run lint",
-    "lint": "standard"
+    "test": "./node_modules/mocha/bin/mocha && npm run lint",
+    "lint": "./node_modukes/standard/bin/cmd.js"
   },
   "repository": {
     "type": "git",
