@@ -245,8 +245,8 @@ module.exports = {
         'description': 'post with integers',
         'consumes': 'application/x-www-form-urlencoded',
         'responses': {
-          '201': {
-            'description': 'noop'
+          '204': {
+            'description': 'OK'
           }
         },
         'parameters': [{
