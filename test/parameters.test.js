@@ -132,11 +132,141 @@ describe('parameters', function () {
           return param.name === 'formMetadata'
         })[0]['required'] = true
 
-        expect(hippie(app, formSchema)
+        expect(
+          hippie(app, formSchema)
           .form()
           .get('/foos')
           .end()
         ).to.be.rejectedWith(/Missing required parameter in formData: formMetadata/)
+      })
+    })
+  })
+
+  describe('integers', function () {
+    describe('when using get', function () {
+      it('when requesting with valid integers, validation is ok', function (done) {
+        hippie(app, swaggerSchema)
+          .get('/integerTest/{fooId}')
+          .pathParams({fooId: 137})
+          .end(done)
+      })
+
+      it('when requesting with non-integer values, validation is rejected', function (done) {
+        try {
+          hippie(app, swaggerSchema)
+            .get('/integerTest/{fooId}')
+            .pathParams({fooId: '137'})
+            .end(done)
+        } catch (e) {
+          expect(e).to.match(/Invalid format for parameter {fooId}/)
+          done()
+        }
+      })
+    })
+
+    describe('when using delete', function () {
+      it('when requesting with valid integers, validation is ok', function (done) {
+        hippie(app, swaggerSchema)
+          .del('/integerTest/{fooId}')
+          .pathParams({fooId: 137})
+          .end(done)
+      })
+
+      it('when requesting with non-integer values, validation is rejected', function (done) {
+        hippie(app, swaggerSchema)
+          .del('/integerTest/{fooId}')
+          .pathParams({fooId: 'c'})
+          .end()
+          .catch(function (err) {
+            expect(err).to.match(/Invalid format for parameter {fooId}/)
+            done()
+          })
+      })
+    })
+
+    describe('when using post', function () {
+      it('when sending valid integers, validation is ok', function (done) {
+        hippie(app, swaggerSchema)
+          .form()
+          .send({
+            barId: 1
+          })
+          .post('/integerTest/{fooId}')
+          .pathParams({fooId: 137})
+          .end(done)
+      })
+
+      it('when sending non-integer values in path, validation is rejected', function (done) {
+        hippie(app, swaggerSchema)
+          .form()
+          .send({
+            barId: 1
+          })
+          .post('/integerTest/{fooId}')
+          .pathParams({fooId: 'c'})
+          .end()
+          .catch(function (err) {
+            expect(err).to.match(/Invalid format for parameter {fooId}/)
+            done()
+          })
+      })
+
+      it('when sending non-integer values in formData, validation is rejected', function (done) {
+        hippie(app, swaggerSchema)
+          .form()
+          .send({
+            barId: 'c'
+          })
+          .post('/integerTest/{fooId}')
+          .pathParams({fooId: 137})
+          .end()
+          .catch(function (err) {
+            expect(err).to.match(/Invalid format for parameter {barId}/)
+            done()
+          })
+      })
+    })
+
+    describe('when using patch', function () {
+      it('when sending valid integers, validation is ok', function (done) {
+        hippie(app, swaggerSchema)
+          .form()
+          .send({
+            barId: 1
+          })
+          .patch('/integerTest/{fooId}')
+          .pathParams({fooId: 137})
+          .end(done)
+      })
+
+      it('when sending non-integer values in path, validation is rejected', function (done) {
+        hippie(app, swaggerSchema)
+          .form()
+          .send({
+            barId: 1
+          })
+          .patch('/integerTest/{fooId}')
+          .pathParams({fooId: 'c'})
+          .end()
+          .catch(function (err) {
+            expect(err).to.match(/Invalid format for parameter {fooId}/)
+            done()
+          })
+      })
+
+      it('when sending non-integer values in formData, validation is rejected', function (done) {
+        hippie(app, swaggerSchema)
+          .form()
+          .send({
+            barId: 'c'
+          })
+          .patch('/integerTest/{fooId}')
+          .pathParams({fooId: 137})
+          .end()
+          .catch(function (err) {
+            expect(err).to.match(/Invalid format for parameter {barId}/)
+            done()
+          })
       })
     })
   })
@@ -150,7 +280,8 @@ describe('parameters', function () {
     })
 
     it('when a parameter fails json-schema validation', function () {
-      expect(hippie(app, swaggerSchema)
+      expect(
+        hippie(app, swaggerSchema)
         .get('/foos/{fooId}')
         .pathParams({ fooId: 45 })
         .end()

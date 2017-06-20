@@ -36,6 +36,20 @@ app.get('/foos', function (req, res) {
   res.send(data.foos)
 })
 
+/* /integerTest */
+app.get('/integerTest/:fooId', function (req, res) {
+  res.send({status: 'ok'})
+})
+app.patch('/integerTest/:fooId', function (req, res) {
+  res.send({status: 'ok'})
+})
+app.post('/integerTest/:fooId', function (req, res) {
+  res.status(204).end()
+})
+app.delete('/integerTest/:fooId', function (req, res) {
+  res.status(204).end()
+})
+
 /*
  * endpoints with invalid response
  */

@@ -202,6 +202,70 @@ module.exports = {
           }
         }
       }
+    },
+    '/integerTest/{fooId}': {
+      'parameters': [{
+        'name': 'fooId',
+        'in': 'path',
+        'description': 'foo identifier',
+        'required': true,
+        'type': 'integer'
+      }],
+      'get': {
+        'description': 'get via integer',
+        'responses': {
+          '200': {
+            'description': 'Successful response',
+            'schema': {
+              '$ref': '#/definitions/simple'
+            }
+          }
+        }
+      },
+      'patch': {
+        'description': 'patch via integer',
+        'consumes': 'application/x-www-form-urlencoded',
+        'parameters': [{
+          'name': 'barId',
+          'in': 'formData',
+          'description': 'bar identifier',
+          'required': true,
+          'type': 'integer'
+        }],
+        'responses': {
+          '200': {
+            'description': 'Successful response',
+            'schema': {
+              '$ref': '#/definitions/simple'
+            }
+          }
+        }
+      },
+      'post': {
+        'description': 'post with integers',
+        'consumes': 'application/x-www-form-urlencoded',
+        'responses': {
+          '204': {
+            'description': 'OK'
+          }
+        },
+        'parameters': [{
+          'name': 'barId',
+          'in': 'formData',
+          'description': 'bar identifier',
+          'required': true,
+          'type': 'integer'
+        }]
+      },
+      'delete': {
+        'description': 'delete with integers',
+        'parameters': [],
+        'responses': {
+          '204': {
+            'description': 'Deleted. No content'
+          }
+        }
+      }
     }
   },
   'definitions': {
@@ -222,6 +286,15 @@ module.exports = {
         'orderNumber': {
           'description': 'the order index of the foo',
           'type': 'integer'
+        }
+      }
+    },
+    'simple': {
+      'type': 'object',
+      'required': ['status'],
+      'properties': {
+        'status': {
+          'type': 'string'
         }
       }
     },
