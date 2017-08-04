@@ -8,7 +8,7 @@ describe('hippie-swagger', function () {
       .get('/foos/{fooId}')
       .pathParams({ fooId: data.firstFoo.id })
       .end(function (err, res) {
-        expect(err).to.be.undefined
+        expect(err).to.be.undefined()
         done()
       })
   })
@@ -19,7 +19,7 @@ describe('hippie-swagger', function () {
       .get('/foos/{fooId}')
       .pathParams({ fooId: data.firstFoo.id })
       .end(function (err, res) {
-        expect(err).to.be.undefined
+        expect(err).to.be.undefined()
         done()
       })
     })
@@ -35,7 +35,7 @@ describe('hippie-swagger', function () {
       .get(HOST + '/foos/{fooId}')
       .pathParams({ fooId: data.firstFoo.id })
       .end(function (err, res) {
-        expect(err).to.be.undefined
+        expect(err).to.be.undefined()
         done()
       })
     })

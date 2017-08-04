@@ -6,7 +6,7 @@ describe('GET requests', function () {
       .get('/foos/{fooId}')
       .pathParams({ fooId: data.firstFoo.id })
       .end(function (err, res) {
-        expect(err).to.be.undefined
+        expect(err).to.be.undefined()
         done()
       })
   })
@@ -24,7 +24,7 @@ describe('GET requests', function () {
     hippie(app, swaggerSchema, { validateResponseSchema: false })
       .get('/invalid-foos')
       .end(function (err) {
-        expect(err).be.undefined
+        expect(err).be.undefined()
         done()
       })
   })

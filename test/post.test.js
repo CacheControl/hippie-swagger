@@ -10,7 +10,7 @@ describe('POST requests', function () {
       .post('/foos')
       .send(validPostBody)
       .end(function (err, res) {
-        expect(err).to.be.undefined
+        expect(err).to.be.undefined()
         done()
       })
   })

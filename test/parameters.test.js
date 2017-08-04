@@ -12,7 +12,7 @@ describe('parameters', function () {
       .get('/foos/{fooId}')
       .pathParams({ fooId: data.firstFoo.id })
       .end(function (err, res) {
-        expect(err).to.be.undefined
+        expect(err).to.be.undefined()
         expect(res.req.path).to.equal('/foos/' + data.firstFoo.id)
         done()
       })
@@ -26,7 +26,7 @@ describe('parameters', function () {
       .get('/foos')
       .qs({ limit: limit, offset: offset })
       .end(function (err, res) {
-        expect(err).to.be.undefined
+        expect(err).to.be.undefined()
         expect(res.req.path).to.equal('/foos?limit=' + limit + '&offset=' + offset)
         done()
       })
@@ -52,8 +52,8 @@ describe('parameters', function () {
         .get('/foos')
         .header('X-Total-Count', 1)
         .end(function (err, res) {
-          expect(err).to.be.undefined
-          expect(res.request.headers['X-Total-Count']).to.exist
+          expect(err).to.be.undefined()
+          expect(res.request.headers['X-Total-Count']).to.exist()
           expect(res.request.headers['X-Total-Count']).to.equal(1)
           done()
         })
@@ -295,7 +295,7 @@ describe('parameters', function () {
         .get('/foos/{fooId}')
         .pathParams({ fooId: 45 })
         .end()
-      ).to.be.rejected
+      ).to.be.rejected()
     })
   })
 
@@ -313,7 +313,7 @@ describe('parameters', function () {
         .patch('/foos/{fooId}')
         .pathParams({ fooId: 45 })
         .end(function (err, res) {
-          expect(err).to.be.undefined
+          expect(err).to.be.undefined()
           expect(res.req.path).to.equal('/foos/' + 45)
           done()
         })
