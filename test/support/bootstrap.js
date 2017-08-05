@@ -4,7 +4,9 @@ var swaggerParser = require('swagger-parser')
 var swaggerSpec = require('./swagger.js')
 var chai = require('chai')
 var chaiAsPromised = require('chai-as-promised')
+var dirtyChai = require('dirty-chai')
 
+chai.use(dirtyChai)
 chai.use(chaiAsPromised)
 
 global.expect = chai.expect

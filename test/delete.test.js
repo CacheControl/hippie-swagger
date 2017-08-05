@@ -6,7 +6,7 @@ describe('DELETE requests', function () {
       .del('/foos/{fooId}')
       .pathParams({ fooId: data.firstFoo.id })
       .end(function (err, res) {
-        expect(err).to.be.undefined
+        expect(err).to.be.undefined()
         expect(res.body).to.eql('')
         done()
       })
