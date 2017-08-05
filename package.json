@@ -1,6 +1,6 @@
 {
   "name": "hippie-swagger",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Hippie wrapper that provides end to end API testing with swagger validation",
   "main": "index.js",
   "scripts": {
