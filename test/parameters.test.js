@@ -151,6 +151,24 @@ describe('parameters', function () {
           .end(done)
       })
 
+      describe('int32', function () {
+        it('when requesting with valid integer, validation is ok', function (done) {
+          hippie(app, swaggerSchema)
+            .get('/foos')
+            .qs({int32: 1})
+            .end(done)
+        })
+      })
+
+      describe('int64', function () {
+        it('when requesting with valid integer, validation is ok', function (done) {
+          hippie(app, swaggerSchema)
+            .get('/foos')
+            .qs({int64: 2147483647 + 1})
+            .end(done)
+        })
+      })
+
       it('when requesting with non-integer values, validation is rejected', function (done) {
         try {
           hippie(app, swaggerSchema)

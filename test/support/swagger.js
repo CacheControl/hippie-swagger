@@ -27,6 +27,20 @@ module.exports = {
       'get': {
         'description': 'List all foos',
         'parameters': [{
+          'name': 'int32',
+          'in': 'query',
+          'description': '32 bit integer',
+          'required': false,
+          'type': 'integer',
+          'format': 'int32'
+        }, {
+          'name': 'int64',
+          'in': 'query',
+          'description': '64 bit integer',
+          'required': false,
+          'type': 'integer',
+          'format': 'int64'
+        }, {
           'name': 'limit',
           'in': 'query',
           'description': 'resultset limiter for pagination',
