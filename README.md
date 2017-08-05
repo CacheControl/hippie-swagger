@@ -108,6 +108,8 @@ hippie(app, swagger, options)
 
 ```validateParameterSchema``` - Validate the request parameters against the swagger json-schema definition (default: ```true```)
 
+```validateRequiredParameters``` - Validate that required parameters were provided  (default: ```true```)
+
 ```errorOnExtraParameters``` - Throw an error if a parameter is missing from the swagger file  (default: ```true```)
 
 ```errorOnExtraHeaderParameters``` - Throw an error if a request header is missing from the swagger file.  By default this is turned off, because it results in every request needing to specify the "Content-Type" and "Accept" headers, which quickly becomes verbose. (default: ```false```)
