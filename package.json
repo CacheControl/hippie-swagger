@@ -48,6 +48,7 @@
     "chai-as-promised": "^6.0.0",
     "dirty-chai": "^2.0.1",
     "express": "^4.15.3",
+    "lodash": "4.17.4",
     "mocha": "^3.5.0",
     "nock": "^9.0.14",
     "standard": "^10.0.2",

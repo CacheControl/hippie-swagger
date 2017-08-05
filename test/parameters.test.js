@@ -1,5 +1,7 @@
 'use strict'
 
+var _ = require('lodash')
+
 describe('parameters', function () {
   it('ignores optional parameters that are missing', function (done) {
     hippie(app, swaggerSchema)
@@ -314,6 +316,16 @@ describe('parameters', function () {
         .pathParams({ fooId: 45 })
         .end()
       ).to.be.rejected()
+    })
+
+    it('when validateRequiredParameters is off, it does not error if required parameter is not provided', function (done) {
+      var schema = _.cloneDeep(swaggerSchema)
+      schema.paths['/foos'].get.parameters.forEach(function (p) {
+        if (p.name === 'limit') p.required = true
+      })
+      hippie(app, schema, { validateRequiredParameters: false })
+        .get('/foos')
+        .end(done)
     })
   })
 
