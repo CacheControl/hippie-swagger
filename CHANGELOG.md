@@ -1,6 +1,7 @@
 3.0.1 / 2017-08-04
 ==================
 
+  * Allow int32 and int64 formats
   * Upgrade dependencies
 
 3.0.0 / 2017-06-19
