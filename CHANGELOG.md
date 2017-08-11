@@ -1,3 +1,8 @@
+3.1.1 / 2017-08-11
+==================
+
+  * Fix unknown format errors for swagger files using swagger-specific formats (float, double, date, etc)
+
 3.1.0 / 2017-08-04
 ==================
 

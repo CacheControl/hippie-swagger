@@ -171,6 +171,15 @@ describe('parameters', function () {
         })
       })
 
+      describe('floats', function () {
+        it('when requesting with valid float, validation is ok', function (done) {
+          hippie(app, swaggerSchema)
+            .get('/foos')
+            .qs({float: 1.1211})
+            .end(done)
+        })
+      })
+
       it('when requesting with non-integer values, validation is rejected', function (done) {
         try {
           hippie(app, swaggerSchema)

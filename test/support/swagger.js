@@ -41,6 +41,13 @@ module.exports = {
           'type': 'integer',
           'format': 'int64'
         }, {
+          'name': 'float',
+          'in': 'query',
+          'description': 'float number',
+          'required': false,
+          'type': 'number',
+          'format': 'float'
+        }, {
           'name': 'limit',
           'in': 'query',
           'description': 'resultset limiter for pagination',
