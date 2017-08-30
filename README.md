@@ -32,7 +32,7 @@ npm install hippie-swagger --save-dev
 
 ```js
 var hippie = require('hippie-swagger'),
-    swagger = require('dereferenced-swagger-file');
+    swagger = require('./my-dereferenced-swagger-file'); // see example for how to dereference swagger
 
 hippie(app, swagger)
 .get('/users/{username}')
