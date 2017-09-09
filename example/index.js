@@ -15,6 +15,8 @@ var path = require('path')
 var dereferencedSwagger
 
 describe('Example of', function () {
+  this.timeout(10000) // very large swagger files may take a few seconds to parse
+
   before(function (done) {
     // if using mocha, dereferencing can be performed prior during initialization via the delay flag:
     // https://mochajs.org/#delayed-root-suite
@@ -46,7 +48,7 @@ describe('Example of', function () {
       try {
         hippie(app, dereferencedSwagger)
           .get('/undocumented-endpoint')
-          .end()
+          .end(done)
       } catch (ex) {
         expect(ex.message).to.equal('Swagger spec does not define path: /undocumented-endpoint')
         done()
@@ -58,7 +60,7 @@ describe('Example of', function () {
         hippie(app, dereferencedSwagger)
           .get('/tags/{tagId}')
           .qs({ username: 'not-in-swagger' })
-          .end()
+          .end(done)
       } catch (ex) {
         expect(ex.message).to.equal('query parameter not mentioned in swagger spec: "username", available params: tagId')
         done()
