@@ -320,11 +320,11 @@ describe('parameters', function () {
 
   describe('settings', function () {
     it('when validateParameterSchema is off, it does not error if parameter fails json-schema validation', function () {
-      expect(hippie(app, swaggerSchema, { validateParameterSchema: false })
+      return expect(hippie(app, swaggerSchema, { validateParameterSchema: false })
         .get('/foos/{fooId}')
         .pathParams({ fooId: 45 })
         .end()
-      ).to.be.rejected()
+      ).to.be.fulfilled()
     })
 
     it('when validateRequiredParameters is off, it does not error if required parameter is not provided', function (done) {
