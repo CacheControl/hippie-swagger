@@ -1,3 +1,9 @@
+3.2.0 / 2018-04-19
+==================
+
+  * Upgrade ajv and qs to latest
+  * Fix unhandled promises in test suite
+
 3.1.1 / 2017-08-11
 ==================
 
