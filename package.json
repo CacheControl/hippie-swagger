@@ -51,7 +51,7 @@
     "lodash": "4.17.4",
     "mocha": "^3.5.0",
     "nock": "^9.0.14",
-    "standard": "^10.0.2",
+    "standard": "^14.3.4",
     "swagger-parser": "^3.3.0"
   }
 }
