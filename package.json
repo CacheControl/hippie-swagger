@@ -1,6 +1,6 @@
 {
   "name": "hippie-swagger",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Hippie wrapper that provides end to end API testing with swagger validation",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CacheControl/hippie-swagger.git"
+    "url": "git+https://github.com/rob4629/hippie-swagger.git"
   },
   "keywords": [
     "hippie",
