@@ -38,7 +38,7 @@
   "homepage": "https://github.com/CacheControl/hippie-swagger#readme",
   "dependencies": {
     "ajv": "^6.4.0",
-    "hippie": "^0.5.1",
+    "hippie": "^0.5.2",
     "object-assign": "^4.1.1",
     "qs": "^6.5.1",
     "string.prototype.startswith": "^0.2.0"
@@ -47,7 +47,7 @@
     "chai": "^3.2.0",
     "chai-as-promised": "^6.0.0",
     "dirty-chai": "^2.0.1",
-    "express": "^4.15.3",
+    "express": "^4.17.1",
     "lodash": "4.17.4",
     "mocha": "^3.5.0",
     "nock": "^9.0.14",
