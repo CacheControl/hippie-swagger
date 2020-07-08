@@ -27,7 +27,7 @@ describe('middleware', function () {
   })
 
   it('url decodes the path', function () {
-    var pathCtx = hippieStub({url: '/foos/%7BfooId%7D'})
+    var pathCtx = hippieStub({ url: '/foos/%7BfooId%7D' })
     pathCtx.swaggerParams = { path: { fooId: '6e9b25c2-7c22-44c5-8890-15613aa1fb6a' } }
     middleware.call(pathCtx, swaggerSchema, { method: 'GET', url: '/foos/{fooId}' }, function (opts) {
       expect(opts).to.exist()
@@ -35,7 +35,7 @@ describe('middleware', function () {
   })
 
   it('merges operation and path parameters', function () {
-    var pathCtx = hippieStub({url: '/foos/%7BfooId%7D'})
+    var pathCtx = hippieStub({ url: '/foos/%7BfooId%7D' })
     pathCtx.swaggerParams = { path: { fooId: '6e9b25c2-7c22-44c5-8890-15613aa1fb6a' } }
     middleware.call(pathCtx, swaggerSchema, { method: 'DELETE', url: '/foos/{fooId}' }, function (opts) {
       expect(opts.url).to.eql('/foos/6e9b25c2-7c22-44c5-8890-15613aa1fb6a')
@@ -44,7 +44,7 @@ describe('middleware', function () {
 
   describe('throws an error', function () {
     it('when the path is not defined in the swagger schema', function () {
-      var pathCtx = hippieStub({url: 'pathNotMentionedInSwagger'})
+      var pathCtx = hippieStub({ url: 'pathNotMentionedInSwagger' })
       expect(middleware.bind(pathCtx, swaggerSchema, options, next))
         .to.throw(/Swagger spec does not define path: pathNotMentionedInSwagger/)
     })
@@ -55,7 +55,7 @@ describe('middleware', function () {
     })
 
     it('when the request method is not defined in the swagger schema', function () {
-      expect(middleware.bind(ctx, swaggerSchema, {method: 'put'}, next))
+      expect(middleware.bind(ctx, swaggerSchema, { method: 'put' }, next))
         .to.throw(/Swagger spec does not define method: "put"/)
     })
   })
@@ -71,7 +71,7 @@ describe('middleware', function () {
 
     it('basePath is set and subpath is /', function () {
       var originalSwaggerSchema = swaggerSchema.basePath
-      var basePathOptions = {method: 'GET', url: '/'}
+      var basePathOptions = { method: 'GET', url: '/' }
       swaggerSchema.basePath = '/base'
       ctx._url = '/base'
 

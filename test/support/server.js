@@ -38,10 +38,10 @@ app.get('/foos', function (req, res) {
 
 /* /integerTest */
 app.get('/integerTest/:fooId', function (req, res) {
-  res.send({status: 'ok'})
+  res.send({ status: 'ok' })
 })
 app.patch('/integerTest/:fooId', function (req, res) {
-  res.send({status: 'ok'})
+  res.send({ status: 'ok' })
 })
 app.post('/integerTest/:fooId', function (req, res) {
   res.status(204).end()
@@ -54,7 +54,7 @@ app.delete('/integerTest/:fooId', function (req, res) {
  * endpoints with invalid response
  */
 app.all('/invalid-foos', function (req, res) {
-  res.send([{'invalid-foo': true}])
+  res.send([{ 'invalid-foo': true }])
 })
 
 /**
