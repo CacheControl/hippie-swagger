@@ -1,10 +1,10 @@
 {
   "name": "hippie-swagger",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Hippie wrapper that provides end to end API testing with swagger validation",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha && npm run lint",
+    "test": "./node_modules/mocha/bin/mocha --exit && npm run lint",
     "lint": "node ./node_modules/standard/bin/cmd.js"
   },
   "repository": {
@@ -37,21 +37,21 @@
   },
   "homepage": "https://github.com/CacheControl/hippie-swagger#readme",
   "dependencies": {
-    "ajv": "^6.4.0",
-    "hippie": "^0.5.1",
+    "ajv": "^6.12.3",
+    "hippie": "^0.5.2",
     "object-assign": "^4.1.1",
-    "qs": "^6.5.1",
+    "qs": "^6.9.4",
     "string.prototype.startswith": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
     "chai-as-promised": "^6.0.0",
     "dirty-chai": "^2.0.1",
-    "express": "^4.15.3",
-    "lodash": "4.17.4",
-    "mocha": "^3.5.0",
-    "nock": "^9.0.14",
-    "standard": "^10.0.2",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "mocha": "^4.1.0",
+    "nock": "^13.0.2",
+    "standard": "^14.3.4",
     "swagger-parser": "^3.3.0"
   }
 }

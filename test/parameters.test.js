@@ -39,9 +39,9 @@ describe('parameters', function () {
       var headerSchema = cloneSwagger(swaggerSchema)
 
       // set X-Total-Count to be required for this test
-      headerSchema['paths']['/foos']['get']['parameters'].filter(function (param) {
+      headerSchema.paths['/foos'].get.parameters.filter(function (param) {
         return param.name === 'X-Total-Count'
-      })[0]['required'] = true
+      })[0].required = true
 
       expect(hippie(app, headerSchema)
         .get('/foos')
@@ -80,9 +80,9 @@ describe('parameters', function () {
         before(function () {
           formSchema = cloneSwagger(swaggerSchema)
           // set parameter to be required for this test
-          formSchema['paths']['/foos/{fooId}']['post']['parameters'].filter(function (param) {
+          formSchema.paths['/foos/{fooId}'].post.parameters.filter(function (param) {
             return param.name === 'uploadedFile'
-          })[0]['required'] = true
+          })[0].required = true
         })
 
         it('errors if file is required & missing header and body', function () {
@@ -115,9 +115,9 @@ describe('parameters', function () {
       it('works if formData is required & present', function (done) {
         // set formMetadata to be required for this test
         var formSchema = cloneSwagger(swaggerSchema)
-        formSchema['paths']['/foos']['get']['parameters'].filter(function (param) {
+        formSchema.paths['/foos'].get.parameters.filter(function (param) {
           return param.name === 'formMetadata'
-        })[0]['required'] = true
+        })[0].required = true
 
         hippie(app, formSchema)
           .form()
@@ -130,15 +130,15 @@ describe('parameters', function () {
         var formSchema = cloneSwagger(swaggerSchema)
 
         // set parameter to be required for this test
-        formSchema['paths']['/foos']['get']['parameters'].filter(function (param) {
+        formSchema.paths['/foos'].get.parameters.filter(function (param) {
           return param.name === 'formMetadata'
-        })[0]['required'] = true
+        })[0].required = true
 
         expect(
           hippie(app, formSchema)
-          .form()
-          .get('/foos')
-          .end()
+            .form()
+            .get('/foos')
+            .end()
         ).to.be.rejectedWith(/Missing required parameter in formData: formMetadata/)
       })
     })
@@ -149,7 +149,7 @@ describe('parameters', function () {
       it('when requesting with valid integers, validation is ok', function (done) {
         hippie(app, swaggerSchema)
           .get('/integerTest/{fooId}')
-          .pathParams({fooId: 137})
+          .pathParams({ fooId: 137 })
           .end(done)
       })
 
@@ -157,7 +157,7 @@ describe('parameters', function () {
         it('when requesting with valid integer, validation is ok', function (done) {
           hippie(app, swaggerSchema)
             .get('/foos')
-            .qs({int32: 1})
+            .qs({ int32: 1 })
             .end(done)
         })
       })
@@ -166,7 +166,7 @@ describe('parameters', function () {
         it('when requesting with valid integer, validation is ok', function (done) {
           hippie(app, swaggerSchema)
             .get('/foos')
-            .qs({int64: 2147483647 + 1})
+            .qs({ int64: 2147483647 + 1 })
             .end(done)
         })
       })
@@ -175,7 +175,7 @@ describe('parameters', function () {
         it('when requesting with valid float, validation is ok', function (done) {
           hippie(app, swaggerSchema)
             .get('/foos')
-            .qs({float: 1.1211})
+            .qs({ float: 1.1211 })
             .end(done)
         })
       })
@@ -184,7 +184,7 @@ describe('parameters', function () {
         try {
           hippie(app, swaggerSchema)
             .get('/integerTest/{fooId}')
-            .pathParams({fooId: '137'})
+            .pathParams({ fooId: '137' })
             .end(done)
         } catch (e) {
           expect(e).to.match(/Invalid format for parameter {fooId}/)
@@ -197,14 +197,14 @@ describe('parameters', function () {
       it('when requesting with valid integers, validation is ok', function (done) {
         hippie(app, swaggerSchema)
           .del('/integerTest/{fooId}')
-          .pathParams({fooId: 137})
+          .pathParams({ fooId: 137 })
           .end(done)
       })
 
       it('when requesting with non-integer values, validation is rejected', function (done) {
         hippie(app, swaggerSchema)
           .del('/integerTest/{fooId}')
-          .pathParams({fooId: 'c'})
+          .pathParams({ fooId: 'c' })
           .end()
           .catch(function (err) {
             expect(err).to.match(/Invalid format for parameter {fooId}/)
@@ -221,7 +221,7 @@ describe('parameters', function () {
             barId: 1
           })
           .post('/integerTest/{fooId}')
-          .pathParams({fooId: 137})
+          .pathParams({ fooId: 137 })
           .end(done)
       })
 
@@ -232,7 +232,7 @@ describe('parameters', function () {
             barId: 1
           })
           .post('/integerTest/{fooId}')
-          .pathParams({fooId: 'c'})
+          .pathParams({ fooId: 'c' })
           .end()
           .catch(function (err) {
             expect(err).to.match(/Invalid format for parameter {fooId}/)
@@ -247,7 +247,7 @@ describe('parameters', function () {
             barId: 'c'
           })
           .post('/integerTest/{fooId}')
-          .pathParams({fooId: 137})
+          .pathParams({ fooId: 137 })
           .end()
           .catch(function (err) {
             expect(err).to.match(/Invalid format for parameter {barId}/)
@@ -264,7 +264,7 @@ describe('parameters', function () {
             barId: 1
           })
           .patch('/integerTest/{fooId}')
-          .pathParams({fooId: 137})
+          .pathParams({ fooId: 137 })
           .end(done)
       })
 
@@ -275,7 +275,7 @@ describe('parameters', function () {
             barId: 1
           })
           .patch('/integerTest/{fooId}')
-          .pathParams({fooId: 'c'})
+          .pathParams({ fooId: 'c' })
           .end()
           .catch(function (err) {
             expect(err).to.match(/Invalid format for parameter {fooId}/)
@@ -290,7 +290,7 @@ describe('parameters', function () {
             barId: 'c'
           })
           .patch('/integerTest/{fooId}')
-          .pathParams({fooId: 137})
+          .pathParams({ fooId: 137 })
           .end()
           .catch(function (err) {
             expect(err).to.match(/Invalid format for parameter {barId}/)
@@ -311,9 +311,9 @@ describe('parameters', function () {
     it('when a parameter fails json-schema validation', function () {
       expect(
         hippie(app, swaggerSchema)
-        .get('/foos/{fooId}')
-        .pathParams({ fooId: 45 })
-        .end()
+          .get('/foos/{fooId}')
+          .pathParams({ fooId: 45 })
+          .end()
       ).to.be.rejectedWith(/Invalid format for parameter {fooId}/)
     })
   })

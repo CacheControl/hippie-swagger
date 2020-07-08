@@ -14,7 +14,7 @@ describe('extra parameters', function () {
       expect(hippie(app, swaggerSchema)
         .get('/foos')
         .form()
-        .send({unmentionedParam1: 'nothing', unmentionedParam2: 'nothing'})
+        .send({ unmentionedParam1: 'nothing', unmentionedParam2: 'nothing' })
         .end()
       ).to.be.rejectedWith(/formData parameter not mentioned in swagger spec: "unmentionedParam1"/)
     })
@@ -34,7 +34,7 @@ describe('extra parameters', function () {
   it('errors on body parameters not mentioned in the swagger spec', function () {
     expect(hippie(app, swaggerSchema)
       .get('/foos')
-      .send({unmentionedParam1: 'nothing'})
+      .send({ unmentionedParam1: 'nothing' })
       .end()
     ).to.be.rejectedWith(/Request "body" present, but Swagger spec has no body parameter mentioned/)
   })
