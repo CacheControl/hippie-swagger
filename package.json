@@ -49,7 +49,7 @@
     "dirty-chai": "^2.0.1",
     "express": "^4.17.1",
     "lodash": "^4.17.15",
-    "mocha": "^6.2.2",
+    "mocha": "^4.1.0",
     "nock": "^13.0.2",
     "standard": "^14.3.4",
     "swagger-parser": "^3.3.0"
