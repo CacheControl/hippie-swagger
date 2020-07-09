@@ -49,6 +49,18 @@ describe('parameters', function () {
       ).to.be.rejectedWith(/Missing required parameter in header: X-Total-Count/)
     })
 
+    it('allows multiple headers is given', function (done) {
+      hippie(app, swaggerSchema)
+        .get('/foos')
+        .headers({ 'X-Total-Count': 1, 'New-Header': 0 })
+        .end(function (err, res) {
+          expect(err).to.be.undefined()
+          expect(res.request.headers['X-Total-Count']).to.exist()
+          expect(res.request.headers['New-Header']).to.exist()
+          done()
+        })
+    })
+
     it('replaces header variables', function (done) {
       hippie(app, swaggerSchema)
         .get('/foos')
