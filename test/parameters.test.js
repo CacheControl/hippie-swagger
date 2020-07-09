@@ -49,7 +49,7 @@ describe('parameters', function () {
       ).to.be.rejectedWith(/Missing required parameter in header: X-Total-Count/)
     })
 
-    it('allows multiple headers is given', function (done) {
+    it('allows multiple headers to be given', function (done) {
       hippie(app, swaggerSchema)
         .get('/foos')
         .headers({ 'X-Total-Count': 1, 'New-Header': 0 })
