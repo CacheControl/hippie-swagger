@@ -3,7 +3,7 @@
 _"The confident hippie"_
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![Build Status](https://travis-ci.org/CacheControl/hippie-swagger.svg)](https://travis-ci.org/CacheControl/hippie-swagger)
+[![Build Status](https://github.com/cachecontrol/hippie-swagger/workflows/Node.js%20CI/badge.svg?branch=master)](https://github.com/cachecontrol/hippie-swagger/workflows/Node.js%20CI/badge.svg?branch=master)
 [![npm version](https://badge.fury.io/js/hippie-swagger.svg)](https://badge.fury.io/js/hippie-swagger)
 
 ## Synopsis
