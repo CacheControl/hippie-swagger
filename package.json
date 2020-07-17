@@ -38,7 +38,7 @@
   "homepage": "https://github.com/CacheControl/hippie-swagger#readme",
   "dependencies": {
     "ajv": "^6.12.3",
-    "hippie": "^0.5.2",
+    "hippie": "^0.6.0",
     "object-assign": "^4.1.1",
     "qs": "^6.9.4",
     "string.prototype.startswith": "^0.2.0"
