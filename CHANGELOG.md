@@ -1,3 +1,8 @@
+3.3.0 / 2020-07-17
+==================
+
+  * Upgrade hippie to latest; multiple header support
+
 3.2.0 / 2018-04-19
 ==================
 
